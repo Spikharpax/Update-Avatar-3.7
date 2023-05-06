@@ -17,7 +17,7 @@ Ajoute et corrige:
 5. Acceptez les remplacements de fichiers.
 
 ***
-## ★ Licens
+## ★ License
 Logiciel libre sous [licence MIT](https://github.com/Spikharpax/A.V.A.T.A.R/blob/master/LICENSE)
 
 Copyright (c) 2019 A.V.A.T.A.R
