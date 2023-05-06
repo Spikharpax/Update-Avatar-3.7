@@ -1,6 +1,6 @@
-# Mise à jour A.V.A.T.A.R version 3.7
+# Mise à jour A.V.A.T.A.R serveur version 3.7
 
-Pour installer cette mise à jour, A.V.A.T.A.R 3.6 doit être installée.
+Pour installer cette mise à jour, A.V.A.T.A.R serveur 3.6 doit être installée.
 Sinon installez d'abord la version 3.6 [ICI !](https://github.com/Spikharpax/A.V.A.T.A.R)
 
 Ajoute et corrige:
