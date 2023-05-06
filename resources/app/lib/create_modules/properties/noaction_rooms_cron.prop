@@ -1,0 +1,19 @@
+{
+	"modules": { 
+		"create_module": {
+			"version": "1.0",
+			"name": "label_module",
+			"clients": {
+				"Salon": 60,
+				"Cuisine": 50
+			}
+		}
+	},
+	"cron": {
+		"create_module": { 
+			"name": "create_module",
+			"time": "0 */2 * * *"
+		}
+	}
+}
+			

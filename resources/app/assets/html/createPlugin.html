@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="node_modules/xel/themes/material.css">
+    <script src="node_modules/xel/xel.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="./styles/font-awesome.min.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/createplugin.css" />
+
+  </head>
+  <body>
+
+<div class="container">
+    <div id="modal-1" class="modal" data-modal-effect="slide-top">
+      <div class="modal-content">
+        <h2 class="fs-title">Démarrage</h2>
+        <h3 class="fs-subtitle">Le nom et le label d'affichage</h3>
+        <p><b>Nom: Obligatoire.</b> Un répertoire du nom du plugin est créé dans le [répertoire bibliothèque] de plugins d'Avatar. Ce répertoire regroupe tous les fichiers du plugin. Le choix du nom du plugin est donc très important et doit être choisi avec refléxion et en relation avec son contenu.</p>
+        <p class="margin-top"><b>Important:</b> Il ne doit pas contenir de blancs ni de caractères spéciaux dans son nom. Evitez aussi les caractères accentués.</p>
+        <p class="margin-top-next"><b>Label:</b> Le label d'affichage est le nom du plugin affiché dans l'interface des plugins. Si aucun label n'est défini, le nom du plugin est utilisé. Le label d'affichage peut-être changé par la suite en modifiant la propriété "name" dans les propriétés du plugin. </p>
+      </div>
+    </div>
+    </div>
+
+    <div id="modal-2" class="modal" data-modal-effect="slide-top">
+          <div class="modal-content">
+            <h2 class="fs-title">L'Intention</h2>
+            <h3 class="fs-subtitle">Gestion des règles vocales</h3>
+            <p>Le fichier d'intention permet de valider les règles vocales que vous dictez pour votre plugin.</p>
+            <p class="margin-top">Il n'est pas obligatoire d'avoir des règles vocales pour un plugin. Les actions du plugin peuvent être directement exécutées, par exemple, depuis une action HTTP provenant d'une box domotique. Si vous choisissez de ne pas avoir de règles vocales, les fichiers d'intention et d'action ne seront pas créés.</p>
+            <p class="margin-top">Il existe 2 façons de valider les règles vocales:</p>
+            <p><b>La reconnaissance par syntaxe</b> qui reconnait une phrase complète.</p>
+            <p><b>La reconnaissance par terme</b> qui reconnait un seul mot dans la phrase.</p>
+            <p class="margin-top margin-top-next">Si vous ne savez pas quoi choisir, sélectionnez la reconnaissance par syntaxe et définissez des phrases complètes pour vos règles.</p>
+          </div>
+        </div>
+    </div>
+
+    <div id="modal-3" class="modal" data-modal-effect="slide-top">
+      <div class="modal-content">
+        <h2 class="fs-title">Multiroom</h2>
+        <h3 class="fs-subtitle">Gérer les pièces de votre installation</h3>
+        <p>Avatar est un système applications clientes/serveur qui gère le multiroom. Vous pouvez donc avoir plusieurs clients associés chacun à une pièce différente. Il est alors très facile que votre plugin sache dans quelle pièce il doit exécuter une action.</p>
+        <p class="margin-top">Si vous cochez "oui" à la question posée, vous trouverez dans votre script js une variable "data.client" qui représente le client qui a passé la règle et une variable "client" avec comme valeur la pièce qui est dans votre phrase.</p>
+      </div>
+    </div>
+
+    <div id="modal-4" class="modal" data-modal-effect="slide-top">
+      <div class="modal-content">
+        <h2 class="fs-title">Le Script</h2>
+        <h3 class="fs-subtitle">Le core de votre plugin</h3>
+        <p>Le fichier Script est le fichier de développement Javascript où vous donnez vie à votre plugin.</p>
+        <p class="margin-top">La méthode init() est une méthode qui est chargée à l'initialisation du plugin pendant le démarrage d'Avatar. Elle vous permet de déclarer ou tester des variables, démarrer des services et de réaliser diverses choses qui doivent être faites pendant la phase d'initialisation.</p>
+        <p class="margin-top">La méthode cron() est une méthode qui est chargée à l'initialisation du plugin pendant le démarrage d'Avatar. Elle vous permet de définir les tâches répétitives dont votre plugin a besoin. Cette méthode est en relation avec un objet "cron" que vous devez <b>obligatoirement</b> configurer dans le fichier de propriétés.</p>
+        <p class="margin-top-next">Nous vous offrons plusieurs templates de fichier javascript suivant votre niveau de développement. Choisissez le template qui vous convient.</p>
+      </div>
+    </div>
+
+    <div id="modal-5" class="modal" data-modal-effect="slide-top">
+      <div class="modal-content">
+        <h2 class="fs-title">Annexe</h2>
+        <h3 class="fs-subtitle">Image et documentation</h3>
+        <p>Vous pouvez choisir une image au format png représentant votre plugin dans la bibliothèque de plugin. L'image sera copiée et renommée avec le nom du plugin dans son répertoire assets/image.</p>
+        <p class="margin-top">Choisissez aussi si votre plugin à une documentation HTML en plus du fichier d'information. Un répertoire "documentation" sera créé dans le répertoire principal de votre plugin et un lien d'accès apparaitra automatiquement dans son menu contextuel. Placez ensuite votre documentation dans ce répertoire.</p>
+        <p class="margin-top">Si le plugin a une documentation HTML, entrez la page de démarrage et si elle à besoin d'un serveur pour être affichée dans un navigateur internet. Le serveur Avatar sera alors automatiquement utilisé pour l'afficher.</p>
+      </div>
+    </div>
+</div>
+
+<form class="steps" accept-charset="UTF-8" enctype="multipart/form-data" novalidate="">
+  <ul id="progressbar">
+    <li class="active">Démarrage</li>
+    <li>L'Intention</li>
+    <li>Multiroom</li>
+    <li>Le Script</li>
+    <li>Annexes</li>
+    <li>La Création</li>
+  </ul>
+
+  <fieldset>
+    <h2 class="fs-title">Information générale</h2>
+    <h3 class="fs-subtitle">Le nom et le label d'affichage</h3>
+    <div class="hs_firstname field hs-form-field">
+      <label for="plugin-name">Quel est le nom du plugin ? *</label>
+      <input id="plugin-name" name="firstname"  maxlength="32" required="required" type="text" value="" placeholder="" data-rule-required="true" data-msg-required="Entrez le nom du plugin" >
+
+      <span class="error1" style="display: none;">
+          <i class="error-log fa fa-exclamation-triangle"></i>
+      </span>
+
+      <label for="plugin-label">Quel est le label d'affichage du plugin ?</label>
+      <input id="plugin-label" name="secondname" type="text" value="">
+    </div>
+    <input type="button" data-page="1" name="next" class="next action-button" value="Suivant" />
+    <div class="explanation btn btn-small modal-trigger" data-modal-id="modal-1"><i class="question-log fa fa-question-circle"></i>&nbsp;Cliquez-moi pour des informations sur l'étape</div>
+  </fieldset>
+
+  <fieldset>
+    <h2 class="fs-title">Le fichier d'Intention</h2>
+    <h3 class="fs-subtitle">Gestion des règles associées à votre plugin dans les phrases que vous prononcez.</h3>
+    <div>
+      <x-box class="x-box-action-small-bottom">
+        <x-checkbox id="is-rule" toggled></x-checkbox>
+        <x-label class="x-label-size">&nbsp;Voulez-vous avoir des règles vocales pour votre plugin ?</x-label>
+      </x-box>
+
+      <label>Y a-t-il plusieurs actions différentes dans votre plugin ?</label>
+      <x-radios>
+        <x-box>
+          <x-radio id="one-action"></x-radio>
+          <x-label class="x-label-size" for="one-action" id="label-one-action">Une seule action, comme par exemple "raconte une blague"</x-label>
+        </x-box>
+        <x-box>
+          <x-radio id="multi-action" toggled></x-radio>
+          <x-label class="x-label-size" for="multi-action" id="label-multi-action">Plusieurs actions, comme par exemple "allume", "éteint"</x-label>
+        </x-box>
+      </x-radios>
+      <label>Comment sont reconnus les règles de votre plugin ?</label>
+      <x-radios>
+        <x-box>
+          <x-radio id="by-syntax" toggled></x-radio>
+          <x-label class="x-label-size" for="by-syntax" id="intent-syntax">Par la syntaxe de la phrase</x-label>
+        </x-box>
+        <x-box>
+          <x-radio id="by-terme"></x-radio>
+          <x-label class="x-label-size" for="by-terme" id="intent-terme">Par un terme dans la phrase</x-label>
+        </x-box>
+      </x-radios>
+    </div>
+
+    <input type="button" data-page="3" name="previous" class="previous action-button" value="Précédent" />
+    <input type="button" data-page="3" name="next" class="next action-button" value="Suivant" />
+    <div class="explanation btn btn-small modal-trigger" data-modal-id="modal-2"><i class="question-log fa fa-question-circle"></i>&nbsp;Cliquez-moi pour des informations sur l'étape</div>
+  </fieldset>
+
+  <fieldset>
+    <h2 class="fs-title">Multiroom</h2>
+    <h3 class="fs-subtitle">La gestion d'une pièce dans l'action</h3>
+    <div>
+      <x-box>
+        <x-checkbox id="room-in-rule"></x-checkbox>
+        <x-label class="x-label-size">&nbsp;Y a-t-il le nom d'une pièce dans l'action à exécuter ?</x-label>
+      </x-box>
+      <x-label class="label-info-action label-top">Cochez si vous pensez qu'il peut y avoir le nom d'une pièce dans une règle, par exemple:</x-label>
+      <x-label class="label-info-action">- "Allume la lumière dans le Salon",</x-label>
+      <x-label class="label-info-action">- Par contre, "Met la chaine TF1" n'aura jamais de nom de pièce.</x-label>
+      <x-label class="label-info-action label-top">Si vous avez choisi de ne pas avoir de règle vocale dans l'étape précédente, le nom de la pièce peut, par exemple, venir d'une box domotique et vous pouvez quand même avoir besoin du nom de la pièce dans votre plugin.</x-label>
+      <br><br>
+    </div>
+    <input type="button" data-page="4" name="previous" class="previous action-button" value="Précédent" />
+    <input type="button" data-page="4" name="next" class="next action-button" value="Suivant" />
+    <div class="explanation btn btn-small modal-trigger" data-modal-id="modal-3"><i class="question-log fa fa-question-circle"></i>&nbsp;Cliquez-moi pour des informations sur l'étape</div>
+  </fieldset>
+
+  <fieldset>
+    <h2 class="fs-title">le fichier Script</h2>
+    <h3 class="fs-subtitle">Là où vous développez les actions de votre plugin</h3>
+    <div>
+        <x-label class="x-label-size label-xbottom">Que voulez-vous inclure dans votre script ?</x-label>
+        <x-box>
+          <x-checkbox id="init-method"></x-checkbox>
+          <x-label class="x-label-size">&nbsp;Une méthode init() exécutée au chargement du plugin</x-label>
+        </x-box>
+        <x-box class="x-box-action">
+          <x-checkbox id="cron-method"></x-checkbox>
+          <x-label class="x-label-size">&nbsp;Une méthode cron() exécutée à intervalle régulier</x-label>
+        </x-box>
+        <br>
+        <x-label class="x-label-size label-xbottom">Comment développez-vous ?</x-label>
+        <x-label class="label-info-action">Nous pouvons vous proposer plusieurs types de templates comme base de création de plugin:</x-label>
+          <x-radios>
+            <x-box>
+              <x-radio id="simple-js"></x-radio>
+              <x-label class="x-label-size" for="simple-js" id="simple-js-label">Basique (Le plus simple)</x-label>
+            </x-box>
+            <x-box>
+              <x-radio id="middle-js" toggled></x-radio>
+              <x-label class="x-label-size" for="middle-js" id="middle-js-label">ECMAScript 5 (Intermédiare)</x-label>
+            </x-box>
+            <x-box>
+              <x-radio id="expert-js"></x-radio>
+              <x-label class="x-label-size" for="expert-js" id="expert-js-label">ECMAScript 6 (Bon niveau avec Promise)</x-label>
+            </x-box>
+          </x-radios>
+          <br>
+    </div>
+
+    <input type="button" data-page="5" name="previous" class="previous action-button" value="Précédent" />
+    <input type="button" data-page="5" name="next" class="next action-button" value="Suivant" />
+    <div class="explanation btn btn-small modal-trigger" data-modal-id="modal-4"><i class="question-log fa fa-question-circle"></i>&nbsp;Cliquez-moi pour des informations sur l'étape</div>
+  </fieldset>
+
+  <fieldset>
+    <h2 class="fs-title">Les informations annexes</h2>
+    <h3 class="fs-subtitle">Image et documentation</h3>
+    <div>
+       <x-box>
+         <x-label class="x-label-size">Choisissez l'image du plugin:&nbsp;&nbsp;</x-label>
+         <div class="cy-plugins" id="cy-plugins">
+             <div id="cy"></div>
+         </div>
+       </x-box>
+       <x-box class="x-box-action x-box-action-bottom">
+         <x-checkbox id="plugin-documentation"></x-checkbox>
+         <x-label class="x-label-size">&nbsp;Le plugin a-t-il une documentation HTML ?</x-label>
+       </x-box>
+       <x-label class="x-label-size">Page de démarrage de la documentation:</x-label >
+       <input id="documentation-name" disabled name="firstname"  maxlength="32" required="required" type="text" value="" placeholder="" data-rule-required="true" data-msg-required="Entrez le nom du fichier" >
+       <span class="error1" style="display: none;">
+           <i class="error-log fa fa-exclamation-triangle"></i>
+       </span>
+       <x-box class="x-box-action x-box-action-bottom">
+         <x-checkbox id="documentation-serveur" disabled></x-checkbox>
+         <x-label class="x-label-size">&nbsp;Serveur pour la documentation</x-label>
+       </x-box>
+    </div>
+
+    <input type="button" data-page="2" name="previous" class="previous action-button" value="Précédent" />
+    <input type="button" data-page="2" name="next" class="next action-button" value="Suivant" />
+    <div class="explanation btn btn-small modal-trigger" data-modal-id="modal-5"><i class="question-log fa fa-question-circle"></i>&nbsp;Cliquez-moi pour des informations sur l'étape</div>
+  </fieldset>
+
+  <fieldset>
+    <h2 class="fs-title">Création du plugin</h2>
+    <h3 class="fs-subtitle">Récupération des informations et traitement</h3>
+    <div id="tab-result"></div>
+    <input type="button" data-page="6" name="previous" class="previous action-button" value="Précédent" />
+    <input id="submit" class="hs-button primary large action-button submit" type="button" value="Créer !">
+    <div class="explanation btn btn-small modal-trigger" ></div>
+  </fieldset>
+
+  <script src='../../lib/jquery/jquery.min.js'></script>
+  <script src='../../lib/jquery/jquery.easing.min.js'></script>
+  <script src='../../lib/jquery/jquery.validate.js'></script>
+  <script  src="../../createPlugin.js"></script>
+</body>
+</html>

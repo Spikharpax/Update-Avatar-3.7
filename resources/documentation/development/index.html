@@ -1,0 +1,2696 @@
+<!DOCTYPE HTML>
+<html><head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="target-densitydpi=device-dpi">
+<meta name="HandheldFriendly" content="true">
+<link rel="canonical" href="http://underscorejs.org/">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"><title>Avatar</title>
+
+<style>
+body {
+font-size: 14px;
+line-height: 22px;
+background: #f4f4f4 url(docs/images/background.png);
+color: #000;
+font-family: Helvetica Neue, Helvetica, Arial;
+}
+.interface {
+font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif !important;
+}
+div#sidebar {
+background: #fff;
+position: fixed;
+top: 0; left: 0; bottom: 0;
+width: 200px;
+overflow-y: auto;
+overflow-x: hidden;
+-webkit-overflow-scrolling: touch;
+padding: 15px 0 30px 30px;
+border-right: 1px solid #bbb;
+box-shadow: 0 0 20px #ccc; -webkit-box-shadow: 0 0 20px #ccc; -moz-box-shadow: 0 0 20px #ccc;
+}
+a.toc_title, a.toc_title:visited {
+display: block;
+color: black;
+font-weight: bold;
+margin-top: 15px;
+}
+a.toc_title:hover {
+text-decoration: underline;
+}
+#sidebar .version {
+font-size: 10px;
+font-weight: normal;
+}
+ul.toc_section {
+font-size: 11px;
+line-height: 14px;
+margin: 5px 0 0 0;
+padding-left: 0px;
+list-style-type: none;
+font-family: Lucida Grande;
+}
+.toc_section li {
+cursor: pointer;
+margin: 0 0 3px 0;
+}
+.toc_section li a {
+text-decoration: none;
+color: black;
+}
+.toc_section li a:hover {
+text-decoration: underline;
+}
+div.container {
+width: 550px;
+margin: 40px 0 50px 260px;
+}
+img#logo {
+width: 396px;
+height: 69px;
+}
+div.warning {
+margin-top: 15px;
+font: bold 11px Arial;
+color: #770000;
+}
+p {
+margin: 20px 0;
+width: 550px;
+}
+a, a:visited {
+color: #444;
+}
+a:active, a:hover {
+color: #000;
+}
+h1, h2, h3, h4, h5, h6 {
+padding-top: 20px;
+}
+h2 {
+font-size: 20px;
+}
+b.header {
+font-size: 16px;
+line-height: 30px;
+}
+span.alias {
+font-size: 14px;
+font-style: italic;
+margin-left: 20px;
+}
+table, tr, td {
+margin: 0; padding: 0;
+}
+td {
+padding: 2px 12px 2px 0;
+}
+table .rule {
+height: 1px;
+background: #ccc;
+margin: 5px 0;
+}
+ul {
+list-style-type: circle;
+padding: 0 0 0 20px;
+}
+li {
+margin-bottom: 10px;
+}
+code, pre, tt {
+font-family: Monaco, Consolas, "Lucida Console", monospace;
+font-size: 12px;
+line-height: 18px;
+font-style: normal;
+}
+tt {
+padding: 0px 3px;
+background: #fff;
+border: 1px solid #ddd;
+zoom: 1;
+}
+code {
+margin-left: 20px;
+}
+pre {
+font-size: 12px;
+padding: 2px 0 2px 15px;
+border-left: 5px solid #bbb;
+margin: 0px 0 30px;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (max-width: 640px),
+only screen and (-o-min-device-pixel-ratio: 3/2) and (max-width: 640px),
+only screen and (min-device-pixel-ratio: 1.5) and (max-width: 640px) {
+img {
+max-width: 100%;
+}
+div#sidebar {
+-webkit-overflow-scrolling: initial;
+position: relative;
+width: 90%;
+height: 120px;
+left: 0;
+top: -7px;
+padding: 10px 0 10px 30px;
+border: 0;
+}
+img#logo {
+width: auto;
+height: auto;
+}
+div.container {
+margin: 0;
+width: 100%;
+}
+p, div.container ul {
+max-width: 98%;
+overflow-x: scroll;
+}
+pre {
+overflow: scroll;
+}
+}
+</style></head>
+<body>
+<div id="sidebar" class="interface"> <a class="toc_title" href="#"> Avatar<span class="version"></span> </a>
+<ul class="toc_section">
+<a class="toc_title" href="#History">Le
+Traitement
+du Langage</a>
+<a class="toc_title" href="#FirstStep">Développement</a>
+<ul class="toc_section">
+<li>- <a href="#Intent">L'intention</a></li>
+<ul>
+<li><a href="#IntentName">Nom du fichier
+d'intention</a></li>
+<li><a href="#createIntent">Création du
+fichier
+d'intention</a></li>
+<ul>
+<li><a href="#intersectFunc">1. La fonction
+Helpers.intersect()</a></li>
+<ul>
+<li><a href="#wherekeyword">D'où vient la
+liste de termes?</a></li>
+</ul>
+<li><a href="#syntaxFunc">2. La fonction
+Helpers.syntax()</a></li>
+<ul>
+<li><a href="#wheresyntax">D'où viennent
+les
+règles de syntaxe?</a></li>
+</ul>
+</ul>
+</ul>
+<li>- <a href="#Action">L'Action</a></li>
+<ul>
+<li><a href="#ActionName">Nom du fichier
+d'action</a></li>
+<li><a href="#createAction">Création du
+fichier d'action</a></li>
+<ul>
+<li><a href="#basicCreate">1. Création
+basique</a></li>
+<li><a href="#multiCreate">2. Création avec
+un tableau de syntaxes multiples</a></li>
+<li><a href="#moreCreate">3. Un peu plus
+loin dans la création</a></li>
+<li><a href="#stateObjet">4. L'objet state</a></li>
+<li><a href="#actionEnd">5. L'action End</a></li>
+</ul>
+</ul>
+<li>- <a href="#ReordonnePlugins">Réordonner
+l'ordre des Plugins pour NLP</a></li>
+<li>- <a href="#Plugin">Les Plugins</a></li>
+<ul>
+<li><a href="#javascript">Le fichier javascript</a></li>
+<ul>
+<li><a href="#actionfunc">fonction action()</a></li>
+<li><a href="#initfunc">fonction init()</a></li>
+<li><a href="#cronfunc">fonction cron()</a></li>
+<li><a href="#mutefunc">fonction mute()</a></li>
+<li><a href="#unmutefunc">fonction unmute()</a></li>
+<li><a href="#addPluginElementsfunc">fonction
+addPluginElements()</a></li>
+<li><a href="#onAvatarClosefunc">fonction
+onAvatarClose()</a></li>
+<li><a href="#subclassSpeakfunc">fonction
+subclassSpeak()</a></li>
+<li><a href="#subclassPlayfunc">fonction
+subclassPlay()</a></li>
+<li><a href="#getPluginPathfunc">fonction
+getPluginPath()</a></li>
+<li><a href="#timeoutCallbackEndfunc">fonction
+timeoutCallbackEnd()</a></li>
+<li><a href="#unresizefunc">fonction
+unresize()</a></li>
+<li><a href="#beforeNodeMenufunc">fonction
+beforeNodeMenu()</a></li>
+</ul>
+<li><a href="#prop">Le fichier de propriétés</a></li>
+<ul>
+<li><a href="#modules">L'objet modules</a></li>
+<li><a href="#cron">L'objet cron</a></li>
+</ul>
+</ul>
+<li>- <a href="#SarahPortage">Portage de plugin
+S.A.R.A.H</a></li>
+<a class="toc_title" href="#API">API JavaScript</a>
+<ul class="toc_section">
+<li>- <a href="#APIServeurFuncs">Fonctions
+Avatar
+Serveur</a></li>
+<ul>
+<li><a href="#APIConfig">Config</a></li>
+<li><a href="#APIConfigModules">Config.modules</a></li>
+<li><a href="#APICurrentRoom">currentRoom</a></li>
+<li><a href="#APIrun">run</a></li>
+<li><a href="#APIcall">call</a></li>
+<li><a href="#APIlast">last</a></li>
+<li><a href="#APIaction">action</a></li>
+<li><a href="#APIclientFromRule">clientFromRule</a></li>
+<li><a href="#APItrigger">trigger</a></li>
+<li><a href="#APIlisten">listen</a></li>
+<li><a href="#APIcopyfile">copyfile</a></li>
+<li><a href="#APIremote">remote</a></li>
+<li><a href="#APIspeak">speak</a></li>
+<li><a href="#APIend">end</a></li>
+<li><a href="#APIaskme">askme</a></li>
+<li><a href="#APIisMobile">isMobile</a></li>
+<li><a href="#APImapClient">mapClient</a></li>
+<li><a href="#APIgetClients">getClients</a></li>
+<li><a href="#APIgetClientSocket">getClientSocket</a></li>
+<li><a href="#APIisServerSpeak">isServerSpeak</a></li>
+<li><a href="#APIexists">exists</a></li>
+</ul>
+<li>- <a href="#APIClientFuncs">Fonctions
+Avatar
+Client</a></li>
+<ul>
+<li><a href="#APIshutup">shutup</a></li>
+<li><a href="#APIplay">play</a></li>
+<li><a href="#APIstop">stop</a></li>
+<li><a href="#APIrunApp">runApp</a></li>
+</ul>
+</ul>
+<a class="toc_title" href="#APIAdvance">Fonctionnalités
+avancées</a>
+<ul class="toc_section">
+<li>- <a href="#APIAdvanceMore">Fonctions
+supplémentaires</a></li>
+<li>- <a href="#APIMore">Un peu plus loin?</a></li>
+</ul>
+</ul>
+</ul>
+</div>
+<div style="width: 1000px;" class="container rule">
+<div style="width: 1000px;" id="documentation"> <span class="header"><em></em></span><br>
+<h1 style="color: rgb(102, 102, 102);" id="History">Le
+Traitement du
+Langage...</h1>
+Lorsque vous dictez quelque chose à Avatar, la phrase est traduite
+automatiquement vers
+l'Anglais puis une analyse sémantique est&nbsp;effectuée sur les
+mots
+ou sur les racines
+anglaises des mots qui elles, ne varient jamais.<br>
+<br>
+Pour réaliser un traitement sémantique de la phrase dictée, Avatar
+intègre son propre <span style="font-style: italic;">traitement
+du langage</span>. Par exemple, si vous dites :<br>
+<ul>
+<li>"<span style="font-style: italic;">J'ai besoin
+d'un rendez-vous avec le dentiste demain à 14 heures à Paris</span>"</li>
+</ul>
+est traduit en anglais par Avatar en:<br>
+<ul>
+<li>"<span style="font-style: italic;">I need an
+appointment with the dentist tomorrow at 2pm in Paris"</span></li>
+</ul>
+<p>Avatar analyse la phrase et crée un <span style="font-style: italic;">scénario en relation</span>:</p>
+<ul>
+<li><strong>SUJET</strong> <code>I</code></li>
+<li><strong>ACTION</strong> <code>need</code></li>
+<li><strong>VALUE</strong> <code>1</code></li>
+<li><strong>OBJECT</strong> <code>appointment</code></li>
+<li><strong>ITEM</strong> <code>the dentist</code></li>
+<li><strong>WHEN</strong> <code>Fri Feb 03
+2017 14:00:00 GMT+0200 (ICT)</code></li>
+<li><strong>LOCATION</strong> <code>Paris</code><code></code></li>
+</ul>
+<p>Avatar retourne aussi des <span style="font-style: italic;">informations
+de contexte</span>:</p>
+<ul>
+<li><strong>LANGUAGE</strong> = fr<code></code></li>
+<li><strong>TYPE</strong> = <code>declarative</code></li>
+<li><strong>SENTIMENT</strong> = <code>0</code>
+(neutral)</li>
+<li><strong>CLASSIFIER</strong> = <code>/travel/transit</code></li>
+<li><strong>PROFILE</strong> <em>(Si
+l'utilisateur a parlé à Avatar précédement, il retourne un historique)</em></li>
+</ul>
+<p style="width: 997px;">Ce qui en en resulte n'est rien
+moins qu'un groupe de règles
+pour le <span style="font-style: italic;">scénario en
+relation</span> et les <span style="font-style: italic;">informations
+de contexte</span>:</p>
+<ul>
+<li><strong>Y&nbsp;a t'il une LOCATION?</strong>
+<span style="font-style: italic;">Oui</span><em>,
+Paris</em></li>
+<li><strong>c'est un negative SENTIMENT?</strong> <em>non,
+neutral</em><strong></strong></li>
+<li><strong>know WHEN?</strong> <span style="font-style: italic;">Oui</span><em>,
+demain à 2pm</em> +</li>
+</ul>
+Si une Intention est vérifiée, une action est assignée qui recoit des
+informations qui peuvent être traitées par un plugin:
+<ul>
+<li>Ajouter un rendez-vous au calendrier<code>${ITEM} à
+${LOCATION} le ${DATE}</code></li>
+</ul>
+Sympa ? <img style="width: 32px; height: 34px;" alt="smile" title="smile" src="images/Smile.png"><br>
+<br>
+<br>
+<br>
+Un petit schéma&nbsp;pour vous montrez comment Avatar intègre son
+traitement du langage dans la totalité du processus:<br>
+&nbsp;<img style="width: 519px; height: 441px;" alt="Schema" title="Schema" src="images/Installation%20schema.png"><br>
+<ol>
+<li>Une règle est jouée</li>
+<li>Le Client écoute</li>
+<li>Audio enregistré</li><li>Envoi de la phrase texte au Serveur et traduction en
+Anglais par <span style="font-style: italic;">Google
+Translate</span> </li>
+<li>Traitement de la phrase traduite en <span style="font-style: italic;">Naturel Language Processing</span></li>
+<ol>
+<li>Traitement la phrase et déterminer si elle correspond à
+un plugin: <span style="font-weight: bold;"><span style="color: rgb(102, 102, 102);">L'intention</span> </span>ou&nbsp;<span style="font-weight: bold; text-decoration: underline; color: rgb(102, 102, 102);">the
+Intent</span></li>
+<li>Exécution de l'action et paramètres associés à
+l'Intention: <span style="font-weight: bold; color: rgb(102, 102, 102);">L'action</span>
+ou&nbsp; <span style="font-weight: bold; text-decoration: underline; color: rgb(102, 102, 102);">the
+Action</span></li>
+</ol>
+<li>Envois vers le <span style="font-weight: bold; color: rgb(102, 102, 102);">plugin</span><span style="color: rgb(102, 102, 102);">
+</span>associé</li>
+<li>Exécution de l'action du plugin et/ou/avec retour vocal sur
+le Client</li>
+</ol>
+<br>
+Tout
+est automatique jusqu'au point<span style="font-weight: bold;">
+5</span>. <br>Après ce point, c'est à vous de jouer
+pour réaliser tout ce que votre imagination peut vous permettre !! :-)<br>
+En conclusion, il va vous falloir:<br>
+<ul>
+<li><span style="color: rgb(153, 0, 0); font-weight: bold;">Déterminer</span><span style="font-weight: bold;"> </span>si la phrase à une
+<span style="font-weight: bold;">intention</span>
+vérifiée</li>
+<li><span style="color: rgb(153, 0, 0); font-weight: bold;">Exécuter</span>
+l'<span style="font-weight: bold;">action</span>
+associée à l'<span style="font-weight: bold;">intention</span></li>
+<li><span style="font-weight: bold; color: rgb(153, 0, 0);">Exécuter</span><span style="color: rgb(153, 0, 0);"> </span>le <span style="font-weight: bold;">plugin</span>
+en relation</li>
+</ul>
+Tout ceci se fait en développement, ce que nous allons voir au chapître
+Développement suivant.<br>
+<br>
+<br>
+<br>
+<h1 style="color: rgb(102, 102, 102);" id="FirstStep">Développement</h1><span style="font-weight: bold;"></span>Depuis
+la version 3.0, vous pouvez utiliser le Plugin Studio, accessible
+depuis le widget du Serveur dans l'interface AVATAR puis "Créer un
+plugin".<br>En choisissant les paramèters de création, vous pouvez
+générer le core de votre plugin directement et automatiquement. Le
+fichier d'intention, le fichier d'action, le fichier de propriétés
+(incluant au besoin l'objet cron) et le fichier js du plugin
+correctement formaté.<br>Ensuite, une fois le plugin généré, vous
+pouvez ouvrir le fichier js du plugin depuis l'onglet "Fichiers" du
+Plugin Studio, cliquez sur le fichier pour l'ouvrir dans l'éditeur de
+texte intégré d'AVATAR et insérer directement des fonctions javascript
+depusi le menu contextuel (clic droit puis "Insérer..."). <br>Même si
+vous n'utilisez pas l'éditeur de texte intégré, ceci peut vous donner
+de bons exemples pour insérer les fonctions que vous voulez.<br>Néanmoins, je vous conseille vivement de lire les chapitres
+suivants pour appréhender toutes les possibilités de dévelopement.
+<h2 style="color: rgb(51, 204, 255);" id="Intent">L'Intention</h2>
+L'intention est ce qui permet à Avatar de déterminer si la phrase
+dictée est
+associée à un plugin (point 1 du point 6 du chapitre précédent).<span style="font-weight: bold;"></span><br style="font-weight: bold;">
+<span style="font-weight: bold; text-decoration: underline; color: rgb(153, 0, 0);"><br>
+</span><span style="color: rgb(153, 0, 0);"><span style="color: black;">Toutes
+les actions dictées vocalement depuis un client ont une
+Intention.</span></span> Par
+contre, on peut très bien ne pas avoir d'Intention si l'action provient
+d'une requète HTTP qui dans ce cas appelle directement l'action du
+plugin (puisque rien n'est dicté).<br>
+<br>
+L'Intention est <span style="text-decoration: underline; font-weight: bold;">un
+fichier javascript (js)</span> que vous créez et dans lequel vous
+définissez ce qui permet de valider l'action.<br>
+<h3 style="color: rgb(153, 51, 153);" id="IntentName">Nom
+du fichier d'intention</h3>
+Un fichier d'intention est créé dans le répertoire du plugin associé.<br>
+<br>
+Vous
+pouvez créer plusieurs&nbsp;fichiers d'intention pour le même
+plugin.
+Par exemple, lorsque les actions associées à l'intention sont trop
+différentes ou encore que pour un type de règles, on préferera chercher
+par un terme et pour les autres par la syntaxe (voir ci-dessous, les
+termes et syntaxes). <br>
+<br>
+Pour un seul fichier d'intention, le nom doit obligatoirement commencer
+par <span style="font-weight: bold;">intent</span><span style="font-style: italic;"> </span>suivi d'<span style="font-weight: bold;">un point</span> (.) et <span style="font-weight: bold;">un nom:&nbsp; </span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span style="font-weight: bold;">intent.</span>&lt;<span style="font-style: italic;">name</span><span style="font-weight: bold;">&gt;</span><span style="font-style: italic;"></span><span style="font-weight: bold;">.js</span> &nbsp;<br>
+Exemple:<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; intent.meteo.js &nbsp; &nbsp;
+&nbsp; &nbsp; =&gt; <span style="font-style: italic;">Dans
+le répertoire</span>&nbsp; <tt style="font-weight: normal;">c:\<span style="font-style: italic;">Dossier
+d'install du serveur\plugins\meteo</span></tt>&nbsp;
+&nbsp; &nbsp; &nbsp;<br>
+<span style="font-weight: bold;"></span><br>
+Pour plusieurs fichiers d'intention, les noms doivent obligatoirement
+commencer par <span style="font-weight: bold;">intents</span><span style="font-style: italic;"> </span>suivi d'<span style="font-weight: bold;">un point</span> (.), <span style="font-weight: bold;">un nom différent</span> et <span style="font-weight: bold;">un suffixe</span> (peut
+être identique):<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span style="font-style: italic; font-weight: bold;">intents</span><span style="font-weight: bold;">.</span>&lt;<span style="font-style: italic;">name</span>&gt;<span style="font-weight: bold;">.</span>&lt;<span style="font-style: italic;">suffixe</span>&gt;<span style="font-weight: bold;">.js</span><br>
+Exemple:<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;
+&nbsp;intents.yahoo.forecast.js<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;intents.msn.forecast.js<br>
+<br>
+<h3 style="color: rgb(153, 51, 153);" id="createIntent">Création
+du fichier d'intention</h3>
+<span style="font-weight: bold;">Important:</span>
+Depuis la version 3.0 d'AVATAR, le fichier d'intention est automatiquement créé par l'action "<span style="font-style: italic;">Créer
+un plugin</span>" depuis le "<span style="font-style: italic;">Plugin
+Studio</span>"
+du menu d'AVATAR Serveur. Suivant les réponses du template de création,
+vous pouvez créer au choix un fichier d'intention de type "intersect"
+ou "syntax" avec votre plugin. Néanmoins, je vous conseille vivement de
+lire les chapitres suivants pour appréhender ce que sont ces
+possibilités.<br>
+Il y a 2 façons de vérifier si la phrase dictée "matche":<br>
+<ol>
+<li>Vérifier si un <span style="font-weight: bold; font-style: italic;">terme </span>d'une
+liste est contenu dans la phrase:</li>
+</ol>
+<ul>
+<ul>
+<ul>
+<li>En utilisant <a href="#intersectFunc">la
+fonction <span style="font-style: italic; color: rgb(204, 0, 0);">Helpers.intersect()</span></a></li>
+</ul>
+</ul>
+</ul>
+<ol start="2">
+<li>Vérifier si la phrase à une <span style="font-weight: bold;">syntaxe</span> spécifique:</li>
+</ol>
+<ul>
+<ul>
+<ul>
+<li>En utilisant <a href="#syntaxFunc">la
+fonction <span style="font-style: italic; color: rgb(204, 0, 0);" href="#syntaxFunc">Helpers.syntax()</span></a></li>
+</ul>
+</ul>
+</ul>
+<span style="font-style: italic; color: rgb(204, 0, 0);"><br>
+</span>
+<h4 style="color: rgb(153, 51, 153);" id="intersectFunc">1.
+La fonction
+Helpers.intersect()</h4>
+La fonction <span style="font-style: italic; color: rgb(204, 0, 0);">intersect</span><span style="color: rgb(204, 0, 0);">() </span>sert à
+vérifier si la phrase (découpée en termes par NLP) contient un terme
+d'une liste de termes.<br>
+<h3 id="wherekeyword">D'où vient la liste de
+termes&nbsp;?</h3>
+La liste de termes est toujours définie dans un tableau, exemple
+["terme"] ou ["terme1","terme2","terme3","terme4",....]<br>
+ILe tableau n'a pas de nom spécifique mais par convention,
+on&nbsp;utilisera "rules".<br>
+<br>
+<span style="font-weight: bold; color: rgb(153, 0, 0); text-decoration: underline;">Tous
+les termes doivent être définis en minuscules et en anglais!</span><br>
+<br>
+Ils peuvent provenir:<br>
+<ol>
+<li>&nbsp;Du fichier de propriétés (.prop) du
+plugin&nbsp;dans le
+répertoire du plugin</li>
+<ul>
+<li><span style="font-weight: bold;">Par
+exemples:</span>&nbsp;&nbsp;</li>
+<ul>
+<li>"rules" :&nbsp;["weather"],&nbsp;</li>
+<li>"rules" :&nbsp;["weather", "umbrella",
+"rain", "forecast", "snow"],&nbsp;</li>
+</ul>
+<li><span style="font-weight: bold;">Rappel:</span>
+Tous les fichiers de propriétés des
+plugins (.prop) sont accessibles depuis l'objet global<span style="font-style: italic;">
+Config.modules.&lt;Plugin&gt;</span></li>
+</ul>
+<li>Directement inclus dans le fichier js de l'intention</li>
+<ul>
+<li><span style="font-weight: bold;">Par exemple:</span>
+<span style="color: rgb(0, 0, 102); font-weight: bold;">var</span>
+rules =&nbsp;["weather", "umbrella",
+"rain", "forecast", "snow"];</li>
+</ul>
+<li>Depuis n'importe quelle autre source...</li>
+</ol>
+<span style="text-decoration: underline; color: rgb(153, 0, 0); font-weight: bold;">Par
+convention, on placera les termes dans le fichier de
+propriétés associé au plugin.</span><br>
+<br>
+Pour une explication simple, nous allons reprendre l'exemple de
+l'action "météo":<br>
+Je veux rechercher si un
+terme est dans la phrase dictée, j'utiliserai donc la fonction <span style="font-style: italic; color: rgb(204, 0, 0);">intersect()</span><span style="color: rgb(204, 0, 0);">.</span><br>
+<br>
+Les termes qui m'intéressent sont définis dans le fichier de propriétés
+du plugin "météo" sous la forme d'un tableau que j'ai nommé "rules":<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; "rules" : ["weather", "umbrella",
+"rain", "forecast", "snow"],<br>
+<br>
+<span style="font-weight: bold;">Rappel:</span> <br>
+<ul>
+<li>Les termes sont en anglais (puisque la phrase est
+traduite). Mais en français, je cherche donc dans toutes les phrases
+que je
+pourrais prononcer les termes suivants: "météo", "parapluie",
+"pluie","prévision","neige".<br>
+</li>
+</ul>
+Le fichier d'intention a une écriture précise et&nbsp;est identique
+pour
+tous les fichiers d'intention. Il n'y a que quelques petites
+différences suivant ce qu'on veut réaliser. Le plus simple est de faire
+un copié/collé d'un fichier d'intention existant.<br>
+<br>
+Pour l'exemple, voici le fichier d'intention <tt style="font-weight: normal;">c:\<span style="font-style: italic;">Dossier
+d'install du serveur\ia\intents\intent.weather.js</span></tt>
+du plugin météo avec les explications en dessous:<br>
+<br>
+<img style="width: 719px; height: 421px;" alt="Intent Intersect" title="Intent Intersect" src="images/js/IntentIntersect.png"><br>
+<br>
+<span style="font-weight: bold;">Explications:</span><br>
+<ul>
+<li>En haut du fichier, les déclarations qui doivent être
+toujours présentes et qui servent à importer la fonction<span style="font-style: italic;"> helpers.intersect</span></li>
+</ul>
+<span style="font-style: italic; color: rgb(102, 102, 102); font-weight: bold;"></span>
+<pre>Object.defineProperty(exports, "__esModule", {<br>value: <span style="font-style: italic;"><span style="color: rgb(0, 0, 102); font-weight: bold;">true</span></span><br>}):<br><span style="font-style: italic;"><span style="color: rgb(0, 0, 102); font-weight: bold;">var</span></span> _helpers = require('../../node_modules/ava-ia/lib/helpers');</pre>
+<span style="font-style: italic; color: rgb(102, 102, 102); font-weight: bold;"></span><span style="font-style: italic;">
+</span>
+<ul>
+<li>
+<pre><span style="font-style: italic;"><span style="color: rgb(0, 0, 102); font-weight: bold;">if</span> (state.isIntent) <span style="color: rgb(0, 0, 102); font-weight: bold;">return</span> (<span style="font-weight: bold; color: rgb(204, 0, 0);">0</span>, _helpers.resolve)(state);</span></pre>
+</li>
+</ul>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; -&nbsp; Dans la fonction principale <span style="font-style: italic;">exports.<span style="color: rgb(0, 0, 102); font-weight: bold;">default</span></span>,
+ce test doit toujours être présent et <span style="font-weight: bold; text-decoration: underline;">en
+haut</span> de la fonction, il sert à ne pas effectuer le test si
+une &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; intention a été trouvée avant et donc
+à sortir de la fonction.
+<ul>
+<li>
+<pre><span style="font-style: italic;"><span style="color: rgb(0, 0, 102); font-weight: bold;">var</span> tokens = (<span style="color: rgb(204, 0, 0); font-weight: bold;">0</span>,_helpers.intersect)(Config.modules.meteo.rules, state.tokens);</span></pre>
+</li>
+</ul>
+<ul>
+</ul>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; - Le test d'intersection entre le
+tableau de termes de la propriété "rules" du fichier meteo.prop et la
+phrase représentée par <span style="font-style: italic;">state.tokens&nbsp;</span>
+<ul>
+<li>
+<pre><span style="font-style: italic;"><span style="color: rgb(0, 0, 102); font-weight: bold;">if</span> (tokens) {</span><span style="font-style: italic;"></span><span style="font-style: italic;"></span> // =&gt; alors</pre>
+</li>
+</ul>
+<span style="font-style: italic;">&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; -</span>
+L'intention a été trouvée,<span style="font-style: italic;">
+state.isIntent </span>devient<span style="font-style: italic;"><span style="font-weight: bold;"> </span><span style="color: rgb(0, 0, 102); font-weight: bold;">true</span></span>
+afin de stopper les tests des intentions suivantes dans la liste.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp; - Si le
+débug est actif, un message est affiché (non obligatoire)<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; -
+L'action associée à l'intent est exécutée.<br>
+<ul>
+<li>Sinon &nbsp;=&gt;</li>
+</ul>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+-L'intention suivante dans la liste des intentions est vérifiée.<br>
+<br>
+Voilà, pas trop compliqué non ? <img style="width: 33px; height: 34px;" alt="smiley" title="smiley" src="images/Smile.png"><br>
+Et souvenez-vous que c'est très rapide de faire un copié/collé d'un
+fichier existant et de modifier les quelques petites différences pour
+l'effectuer pour une intention d'un autre plugin avec des termes
+différents. Ici, finalement:<br>
+<ul>
+<li>Le <span style="font-style: italic;">Config.modules.&lt;<span style="font-weight: bold;">plugin</span>&gt;.rules</span></li>
+<li><span style="font-style: italic;"></span>Le
+texte du message <span style="font-style: italic;"> info('<span style="font-weight: bold;">IntentWeather</span>'...) </span>dans
+la console (et encore... on n'est pas obligé d'avoir un message dans la
+console...).</li>
+</ul>
+<br>
+<h4 style="color: rgb(153, 51, 153);" id="syntaxFunc">2.
+La fonction
+Helpers.syntax()</h4>
+La fonction <span style="font-style: italic; color: rgb(204, 0, 0);">syntax()</span><span style="color: rgb(204, 0, 0);"> </span>sert à
+vérifier si une phrase dictée a une syntaxe spécifique.<br>
+<h4 id="wheresyntax">D'où viennent les règles de syntaxe?</h4>
+Comme pour la fonction <span style="font-style: italic;">Intersect()</span>,
+les syntaxes sont définies dans des tableaux de règles.<br>
+Ils peuvent provenir:<br>
+<ol>
+<li>&nbsp;Du fichier de propriétés (.prop) du plugin dans
+le
+répertoire du plugin</li>
+<ul>
+<li><span style="font-weight: bold;">Par exemple:</span>&nbsp;
+"lightOn" :&nbsp;["switch on * light","turn on * light"],&nbsp;<span style="font-weight: bold;"></span></li>
+<li><span style="font-weight: bold;">Rappel:</span>
+Tous les fichiers de propriétés des
+plugins (.prop) sont accessibles depuis l'objet global<span style="font-style: italic;">
+Config.modules.&lt;Plugin&gt;</span></li>
+</ul>
+<li>Directement inclus dans le fichier js de l'intention</li>
+<ul>
+<li><span style="font-weight: bold;">Par exemple:</span>
+<span style="color: rgb(0, 0, 102); font-weight: bold;">var</span>&nbsp;lightOn
+= ["switch on * light","turn on * light"];</li>
+</ul>
+<li>Depuis n'importe quelle autre source...</li>
+</ol>
+<span style="text-decoration: underline; color: rgb(153, 0, 0); font-weight: bold;">Par
+convention, on placera les règles de syntaxe dans le fichier
+de
+propriétés associé au plugin.</span><br>
+<span style="font-weight: bold;"><br>
+</span>Il n'y a pas de nom spécifiques à ces tableaux de règles.
+Là,
+c'est
+vous qui choisissez en fonction de ce que vous voulez réaliser et la
+complexité de l'action associée. Par exemple, une règle peut renvoyer
+(par son nom) vers un autre tableau d'objet du fichier de propriétés de
+votre plugin où sont définis des propriétés nécessaires à l'exécution
+de l'action.<br>
+<br>
+<span style="font-weight: bold; color: rgb(153, 0, 0); text-decoration: underline;">Tous
+les règles de syntaxe doivent être définis en minuscules et en anglais !</span><br>
+<br>
+Ci-dessous la liste des correspondances que vous pouvez mettre dans les
+tableaux de règles:<br>
+<br>
+<table style="text-align: left; width: 995px; height: 184px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="width: 285px; text-align: center; font-weight: bold; background-color: rgb(255, 204, 153);">Correspondance</td>
+<td style="width: 674px; text-align: center; font-weight: bold; background-color: rgb(255, 204, 153);">Description</td>
+</tr>
+<tr>
+<td style="width: 285px;"><span style="font-weight: bold;">Basic matching</span></td>
+<td style="width: 674px;">La phrase doit
+correspondre exactement à la règle<br>
+<br>
+&nbsp;&nbsp;&nbsp; "rules" : {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp; "regle" : [ "remove&nbsp;program"]<br>
+&nbsp;&nbsp;&nbsp; },<br>
+<br>
+&nbsp;&nbsp;&nbsp; "rules" : {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp; "regle" : [
+"remove&nbsp;program","delete program"]<br>
+&nbsp; &nbsp; },</td>
+</tr>
+<tr>
+<td style="width: 285px;"><span style="font-weight: bold;">POS matching</span></td>
+<td style="width: 674px;">Vous pouvez utiliser la
+définition<span style="font-style: italic;">
+</span>du
+terme, tous les mots ayant cette définition seront acceptés. <br>
+<br>
+&nbsp;&nbsp;&nbsp; "rules" : {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp; "regle" : [ "remove [Noun]"]<br>
+&nbsp;&nbsp;&nbsp; },<br>
+<br>
+Quelques définitions acceptées: [Possessive], [Noun], [Infinitive],
+[Preposition], [Demonym],
+[Adverb], [Copula]<br>
+Il y a un grand nombre de définitions de termes. Un bon
+moyen&nbsp;de
+valider les termes présents dans la phrase est d'utilser la fonction <span style="font-style: italic;">_nlp_compromise2.default.text()</span>
+<br>
+<br>
+<pre><span style="font-style: italic;">var terms = _nlp_compromise2.default.text(state.sentence).sentences[0].terms;<br>terms.map(function (term, index) {<br>	info('tag:', term.tag);<br>}</span>);<br></pre>
+Vous pouvez utiliser aussi l'objet tags de <a href="index.html#stateObjet">l'objet state</a><br>
+<pre>state.tags</pre>
+Exemple d'application, le plugin translate (voir le fichier <span style="font-style: italic;">action.translator.js</span>)<br>
+</td>
+</tr>
+<tr>
+<td style="width: 285px;"><span style="font-weight: bold;">Alias matching</span></td>
+<td style="width: 674px;">Recherche les mots qui
+"signifient" la même chose. Synonymes, formes et
+conjugaisons différentes sont pris en charge.<br>
+<br>
+&nbsp;&nbsp;&nbsp; "rules" : {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp; "regle" : [ "~remove~&nbsp;program"]<br>
+&nbsp;&nbsp;&nbsp; },<br>
+</td>
+</tr>
+<tr>
+<td style="width: 285px;"><span style="font-weight: bold;">Wildcard matching</span></td>
+<td style="width: 674px;">Le caractère <tt style="font-weight: normal;"><span style="font-style: italic;">.</span></tt>
+signifie "n'importe quel terme"<br>
+&nbsp;&nbsp;&nbsp; "rules" : {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp; "regle" : [ "~remove~ . program"]<br>
+&nbsp;&nbsp;&nbsp; },<br>
+<br>
+Le caractère <tt style="font-weight: normal;"><span style="font-style: italic;">*</span></tt>
+signifie "tous les termes jusqu'à". Peut être 0.<br>
+&nbsp;&nbsp;&nbsp; "rules" : {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp; "regle" : [ "~remove~ * program"]<br>
+&nbsp;&nbsp;&nbsp; },</td>
+</tr>
+<tr>
+<td style="width: 285px;"><span style="font-weight: bold;">Optional matching</span></td>
+<td style="width: 674px;">Le caractère <tt style="font-weight: normal;"><span style="font-style: italic;">?</span></tt> à la
+fin d'un mot signifie qu'il n'est pas obligatoire.<br>
+&nbsp;&nbsp;&nbsp; "rules" : {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp; "regle" : [ "~remove~ a? program"]<br>
+&nbsp;&nbsp;&nbsp; }, <br>
+<br>
+&nbsp;&nbsp;&nbsp; "rules" : {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp; "regle" : [ "~remove~ [Preposition]?
+program"]<br>
+&nbsp;&nbsp;&nbsp; },</td>
+</tr>
+<tr>
+<td><span style="font-weight: bold;">List of
+options</span></td>
+<td><tt style="font-weight: normal;"><span style="font-style: italic;">(mot1|mot2)</span></tt>
+entre parenthèses signifie ..."ou"... pour&nbsp;les mots possibles.<br>
+&nbsp;&nbsp;&nbsp; "rules" : {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp; "regle" : [ "~remove~ *
+(program|programs|scenario)"]<br>
+&nbsp;&nbsp;&nbsp; },<br>
+<br>
+&nbsp;&nbsp;&nbsp; "rules" : {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp; "regle" : [ "(~remove~|~delete~) *
+(program|programs|scenario)"]<br>
+&nbsp;&nbsp;&nbsp; },</td>
+</tr>
+<tr>
+<td><span style="font-weight: bold;">Location
+flags</span></td>
+<td><tt style="font-weight: normal;"><span style="font-style: italic;">^</span></tt>
+signifie que le mot doit être&nbsp;"<span style="font-style: italic;">au début de la phrase</span>".<br>
+&nbsp;&nbsp;&nbsp; "rules" : {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp; "regle" : [ "^remove&nbsp;program"]<br>
+&nbsp;&nbsp;&nbsp; },<br>
+<br>
+<tt style="font-weight: normal;"><span style="font-style: italic;">$</span></tt>&nbsp;signifie
+que le mot doit être&nbsp;"<span style="font-style: italic;">à
+la fin de la phrase</span>".<br>
+&nbsp;&nbsp;&nbsp; "rules" : {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp; "regle" : [ "remove * program$"]<br>
+&nbsp;&nbsp;&nbsp; },</td>
+</tr>
+</tbody>
+</table>
+<br>
+<br>
+Reprennons l'exemple de
+l'action "météo", ici nous allons vérifier la syntaxe de la phrase,
+j'utiliserai donc la
+fonction <span style="font-style: italic; color: rgb(204, 0, 0);">intersect</span><span style="color: rgb(204, 0, 0);">().</span><br>
+<br>
+Les phrases qui m'intéressent sont définies dans le fichier de
+propriétés <tt style="font-weight: normal;"><span style="font-style: italic;">meteo.prop</span></tt>
+du plugin "météo" sont la forme d'un tableau que j'ai nommé "rules":<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; "rules" : ["~give~ *
+(weather|forecast)"],<br>
+<br>
+Suivant les règles de correspondances juste au dessus, j'accepte donc
+les phrases qui correspondent à la syntaxe suivante:<br>
+<ul>
+<li>Tous les synonymes, formes et conjugaisons de "<span style="font-style: italic;">give</span>"</li>
+<li>N'importe quel mot ensuite&nbsp;</li>
+<li>Les termes <span style="font-style: italic;">weather</span>
+ou <span style="font-style: italic;">forecast</span></li>
+</ul>
+Le
+fichier <tt style="font-weight: normal;"><span style="font-style: italic;">intent.weather.js</span></tt>&nbsp;
+sera presque identique à l'exemple précedent
+(voir <span style="font-style: italic;">Helpers.intersect</span>)
+à l'exception de la fonction validant
+l'intention<br>
+<br>
+<img style="width: 712px; height: 388px;" alt="Intent" title="Intent" src="images/js/Intent.png"><br>
+<br>
+<br>
+<h2 style="color: rgb(51, 204, 255);" id="Action">L'Action</h2>
+L'action est ce qui permet d'exécuter quelque chose associée à une
+intention. Dit autrement, si il y a un fichier d'intention, il y a
+forcément au minimum un fichier d'action.<br>
+L'action est <span style="text-decoration: underline; font-weight: bold;">un
+fichier javascript (js)</span> que vous créez et dans lequel vous
+mettez ce qui permet de la définir:<br>
+<ul>
+<ul>
+<li>Exécution de fonctions</li>
+</ul>
+<ul>
+<li>Récupération de propriétés</li>
+</ul>
+<ul>
+<li>Contrôles et/ou tests supplémentaires</li>
+</ul>
+<ul>
+<li>Envoi à Avatar avec un nom de plugin à exécuter, l'action
+dans le plugin et des
+propriétés pour l'action</li>
+</ul>
+</ul>
+<span style="font-weight: bold;">
+</span>
+<h3 style="color: rgb(204, 51, 204);" id="ActionName">Nom
+du fichier d'action</h3>
+Un fichier&nbsp;d'action est créé dans le répertoire du plugin
+associé.<br>
+<br>
+Pour un seul fichier d'action, les noms doivent obligatoirement
+commencer par <span style="font-weight: bold;">action </span>suivi
+d'<span style="font-weight: bold;">un point</span>
+(.) et <span style="font-weight: bold;">un nom</span>:<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp;<span style="font-weight: bold;">action</span><span style="font-weight: bold;">.</span>&lt;<span style="font-style: italic;">name</span>&gt;<span style="font-weight: bold;">.js<br>
+</span>Exemple:<br>
+&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; action.weather.js &nbsp;
+&nbsp; &nbsp; &nbsp;=&gt; Dans le répertoire&nbsp; <tt style="font-weight: normal;">c:\<span style="font-style: italic;">Dossier
+d'install du serveur\plugins\meteo</span></tt>&nbsp;
+&nbsp; &nbsp; &nbsp;<br>
+<span style="font-weight: bold;"></span><br>
+Vous
+pouvez créer plusieurs&nbsp;fichiers d'action&nbsp;pour la même
+intention. Par
+exemple, lorsque plusieurs actions différentes peuvent être associés à
+une intention. <br>
+Dans ce cas, c'est une course et le premier qui gagne cette course
+et&nbsp;retourne les
+informations demandées gagne&nbsp;le droit d'exécuter le
+plugin !<br>
+<br>
+Pour <span style="font-weight: bold; text-decoration: underline;">plusieurs
+fichiers d'action</span> et <span style="font-weight: bold; text-decoration: underline;">un
+fichier d'intention</span>, les noms doivent obligatoirement
+commencer par <span style="font-weight: bold;">action </span>suivi
+d'<span style="font-weight: bold;">un point</span>
+(.) et <span style="font-weight: bold;">un nom différent</span>:
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="font-style: italic; font-weight: bold;">action</span><span style="font-weight: bold;">.</span>&lt;<span style="font-style: italic;">name</span>&gt;<span style="font-weight: bold;">.js</span><br>
+Exemple:<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;
+&nbsp;action.forecast.yahoo.js &nbsp; &nbsp; &nbsp;
+=&gt;&nbsp;<span style="font-style: italic;">Pour
+la recherche avec l'<span style="color: rgb(204, 0, 0);">API
+Yahoo</span></span><br>
+&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; action.forecast.msn.js &nbsp;
+&nbsp; &nbsp; &nbsp;
+&nbsp;=&gt; <span style="font-style: italic;">Pour
+la recherche sur le <span style="color: rgb(204, 0, 0);">site
+de Msn</span></span><br>
+<br>
+Vous pouvez
+retrouver cet exemple dans Avatar puisque c'est la définition exacte du
+plugin météo pour laquelle une course est effectuée entre Msn et Yahoo
+et le premier qui retourne l'information gagne (pour mémo, depuis
+quelques mois, Yahoo a stoppé l'utilisation gratuite de son API.
+Néanmoins, vous pouvez quand même vous référez au plugin pour avoir un
+exemple).<br>
+<br>
+Pour <span style="font-weight: bold; text-decoration: underline;">plusieurs
+fichiers d'action</span> et <span style="font-weight: bold; text-decoration: underline;">plusieurs
+fichiers d'intention</span>, les noms doivent obligatoirement
+commencer par <span style="font-weight: bold;">actions </span>suivi
+d'<span style="font-weight: bold;">un point</span>
+(.), le &lt;<span style="font-weight: bold;">name</span>
+<span style="font-weight: bold;">de l'intention associée</span>&gt;
+et un <span style="font-weight: bold;">suffixe</span>
+<span style="font-weight: bold;">différent</span>: <br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="font-style: italic; font-weight: bold;">action</span><span style="font-weight: bold;">.</span>&lt;<span style="font-style: italic;">le</span> <span style="font-style: italic;">name de l'intention associée</span>&gt;<span style="font-weight: bold;">.</span><span style="font-style: italic;">&lt;suffixe&gt;</span><span style="font-weight: bold;">.js</span><br>
+Par exemple, supposons que nous ayons 2 fichiers d'intention pour la
+météo:<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;
+&nbsp;intents.<span style="color: rgb(153, 51, 0);">meteozoulou</span>.forecast.js
+&nbsp; &nbsp;=&gt; pour des règles vocales spéciales "météo
+zoulou".<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;intents.<span style="color: rgb(51, 51, 255);">weather</span>.forecast.js
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =&gt; pour
+rechercher sur des sites plus classique <span style="font-style: italic;">avec </span>2 fichiers
+d'action sur l'<span style="color: rgb(204, 0, 0);"></span><span style="font-style: italic;"><span style="color: rgb(204, 0, 0);">API Yahoo </span></span><span style="color: rgb(204, 0, 0);"><span style="color: black;">et
+</span></span>le<span style="font-style: italic;">
+<span style="color: rgb(204, 0, 0);">site de Msn</span></span><br>
+Nous aurons alors:<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;actions.<span style="color: rgb(153, 51, 0);">meteozoulou</span>.classique.js<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;actions.<span style="color: rgb(51, 51, 255);">weather</span>.msn.js<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;actions.<span style="color: rgb(51, 51, 255);">weather</span>.yahoo.js<br>
+Supposons un 2ème exemple ou nous avons 2 fichiers d'action pour
+"meteozoulou" à la place d'un:<br>
+Nous aurons alors:<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;actions.<span style="color: rgb(153, 51, 0);">meteozoulou</span>.classique.js<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;actions.<span style="color: rgb(153, 51, 0);">meteozoulou</span>.special.js<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;actions.<span style="color: rgb(51, 51, 255);">weather</span>.msn.js<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;actions.<span style="color: rgb(51, 51, 255);">weather</span>.yahoo.js<br>
+<br style="font-weight: bold;">
+<span style="font-weight: bold;">En conclusion:</span>
+Aucune configuration n'est nécessaire pour réaliser l'association <span style="font-weight: bold;">fichier d'intention-fichier
+d'action</span> dans Avatar. Elle&nbsp;est automatique par
+les noms des fichiers.<br>
+<br>
+<span style="font-weight: bold;">Dernier rappel:</span>
+<br>
+<ul>
+<li>Le premier fichier d'action associé à une intention qui
+gagne la course et&nbsp;retourne les
+informations demandées gagne&nbsp;le droit d'exécuter&nbsp;le
+plugin !</li>
+<li>Cette course <span style="font-weight: bold; text-decoration: underline;">n'est
+que</span>
+pour les fichiers d'actions d'une seule intention. Si il y a 2 fichiers
+d'intention, c'est parce qu'il y a des règles vocales différentes qui
+dirigeront vers des actions différentes ! </li>
+</ul>
+<br>
+<h3 style="color: rgb(204, 51, 204);" id="createAction">Création
+du fichier d'action</h3>
+<span style="font-weight: bold;">Important:</span>
+Depuis la version 3.0 d'AVATAR, le fichier d'action est automatiquement créé par l'action "<span style="font-style: italic;">Créer
+un plugin</span>" depuis le "<span style="font-style: italic;">Plugin
+Studio</span>"
+du menu d'AVATAR Serveur. Suivant les réponses du template de création,
+vous pouvez créer un fichier d'action plus ou moins complexe avec votre
+plugin. Néanmoins, je vous conseille vivement de
+lire les chapitres suivants pour appréhender ce que sont ces
+possibilités.<br>
+<br>
+Il
+ya plusieurs fonctions de traitement du langage que l'on peut utiliser
+pour récupérer des informations sur les termes, par exemple pour savoir
+et/ou retrouver dans ce qu'on a dit:&nbsp; un lieu, une heure,
+l'objet
+de l'action.... (voir le chapitre <a href="#documentation">Un
+peu d'histoire sur le traitement du langage</a>)<br>
+<br>
+Dans
+ce chapitre, nous&nbsp;allons appréhender le mécanisme de création
+du fichier d'action au travers d'exemples simples et fonctionnels.<br>
+Pour de plus amples renseignements, <span style="text-decoration: underline;">utilisez les fichiers
+d'actions
+disponibles dans Avatar comme support d'apprentissage</span>.<br>
+<h4 style="color: rgb(153, 51, 153);" id="basicCreate">1.
+Creation basique</h4>
+Un
+fichier d'action basique est le plus simple fichier d'action qu'il est
+possible de créer. Il définie uniquement le plugin à exécuter.<br>
+Prenons l'exemple&nbsp;de demande de l'heure.<br>
+<ul>
+<li><span style="color: rgb(0, 102, 0);"><span style="font-weight: bold;">Vous: </span></span>SARAH
+?</li>
+<li><span style="color: rgb(102, 0, 0); font-weight: bold;">Avatar</span><span style="color: rgb(102, 0, 0); font-weight: bold;">:</span>
+oui ?</li>
+<li><span style="color: rgb(0, 102, 0);"><span style="font-weight: bold;">Vous:</span><span style="color: black;"> quelle heure est-il ?</span></span></li>
+<li><span style="color: rgb(102, 0, 0); font-weight: bold;">Avatar</span><span style="color: rgb(102, 0, 0); font-weight: bold;">:</span><span style="color: black;"> il est 20 heures 50</span></li>
+</ul>
+Il n'y a aucune propriétés, aucun choix de règles possible, Avatar doit
+juste retourner l'heure qu'il est.<br>
+<br>
+Le fichier d'action <tt style="font-weight: normal;"><span style="font-style: italic;">action.hour.js</span></tt>
+se présentera alors sous cette forme:<br>
+<br>
+<img style="width: 486px; height: 388px;" alt="Action Hour" title="Action Hour" src="images/js/ActionHour.png"><br>
+<br>
+<span style="font-weight: bold;">Explications:</span><br>
+<ul>
+<li>En haut du fichier, les déclarations qui doivent être
+toujours présentes et qui servent à exporter le&nbsp;fichier
+d'action<span style="font-style: italic;"></span><span style="font-style: italic; color: rgb(102, 102, 102); font-weight: bold;">&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;</span><br>
+</li>
+</ul>
+<span style="font-style: italic;"></span>
+<pre><span style="font-style: italic; color: rgb(102, 102, 102); font-weight: bold;">'use strict';</span><br><span style="font-style: italic;">Object.defineProperty(exports,"<span style="font-weight: bold; color: rgb(102, 102, 102);">__esModule</span>", {</span><br><span style="font-style: italic;">&nbsp; value: <span style="color: rgb(0, 0, 102); font-weight: bold;">true</span></span><br><span style="font-style: italic;">});</span></pre>
+<span style="font-style: italic;"></span>
+<ul>
+<li>
+<pre><span style="font-style: italic;"><span style="color: rgb(0, 0, 102);"><span style="color: black;"><span style="color: rgb(0, 0, 102); font-weight: bold;">return new</span> Promise<span style="color: black;">(</span><span style="color: rgb(0, 0, 102); font-weight: bold;">function</span><span style="font-weight: bold;"> </span>(resolve, reject) {</span><span style="color: black;"></span><span style="color: black;"><br></span></span></span></pre>
+</li>
+</ul>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; - Avatar
+utilise les "<span style="font-style: italic;">Promise</span>",
+vous devez donc toujours utiliser cette syntaxe javascript.<br>
+<ul>
+<li>
+<pre><span style="font-style: italic;"><span style="color: rgb(0, 0, 102);"><span style="color: black;">setTimeout(<span style="color: rgb(0, 0, 102); font-weight: bold;">function</span>(){</span><span style="color: black;"><br></span></span></span></pre>
+</li>
+</ul>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; -
+Encapsuler la création de l'objet <span style="font-style: italic;">state.action</span>
+dans un setTimeout permet d'éviter des problèmes de synchronisation
+javascript. Cette fonction n'est &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;pas obligatoire
+mais habituez-vous à l'ajouter, 500 milli-secondes sont à priori
+suffisantes.<br>
+<ul>
+<li>
+<pre><span style="font-style: italic;"><span style="color: rgb(0, 0, 102);"><span style="color: black;">state.action = {</span><span style="color: black;">&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp; module: '<span style="font-weight: bold; color: rgb(102, 102, 102);">hour'</span></span><span style="color: black;"><br>};</span><span style="color: black;"><br></span></span></span></pre>
+</li>
+</ul>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; - La
+définition du plugin qui doit être appelé.Toujours défini par <span style="font-style: italic;">state.action.module</span>
+:<span style="font-style: italic;"> 'module name'</span><br>
+<ul>
+<li>&nbsp;&nbsp;<span style="font-style: italic;"><span style="color: rgb(0, 0, 102);"><span style="color: black;">resolve(state);</span></span></span></li>
+</ul>
+<span style="font-style: italic;"><span style="color: rgb(0, 0, 102);"><span style="color: black;">&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; - </span></span></span><span style="color: rgb(0, 0, 102);"><span style="color: black;">fonction</span></span><span style="font-style: italic;"><span style="color: rgb(0, 0, 102);"><span style="color: black;">
+resolve </span></span></span><span style="color: rgb(0, 0, 102);"><span style="color: black;">d'exécution
+de l'action</span></span><span style="font-style: italic;"><span style="color: rgb(0, 0, 102);"><span style="color: black;"></span></span></span>
+en passant en paramètre l'objet <span style="font-style: italic;">state</span><br>
+<br>
+Voilà, pas trop compliqué non ? :-)<br>
+Et souvenez-vous que c'est très rapide de faire un copié/collé d'un
+fichier existant et de modifier les quelques petites différences d'un
+autre plugin, Soit:<br>
+<ul>
+<li>Le nom<span style="font-style: italic;"> </span>du
+plugin à exécuter dans<span style="font-style: italic;">
+state.action.module</span></li>
+<li><span style="font-style: italic;"></span>Le
+texte du message <span style="font-style: italic;"> info('<span style="font-weight: bold;">ActionHour</span>'...) </span>dans
+la console (et encore... on n'est pas obligé d'avoir un message dans la
+console...).</li>
+</ul>
+<h4 style="color: rgb(153, 51, 153);" id="multiCreate">2.
+Création avec un tableau de
+syntaxes multiples</h4>
+Prenons le même exemple avec le plugin <tt style="font-weight: normal;"><span style="font-style: italic;">hour</span></tt>
+mais en y ajoutant 2 actions:<br>
+<ul>
+<li>Donner l'heure</li>
+<li>Donner la date</li>
+</ul>
+A
+l'inverse de l'exemple basic qui ne necéssite pas de rechercher
+l'action à exécuter, dans celui ci, nous avons 2 actions différentes
+pour le même plugin.<br>
+Evidement nous avons aussi 2 règles définies dans le fichier <tt style="font-weight: normal;"><span style="font-style: italic;">hour.prop</span></tt>
+&nbsp;sous forme d'un tableau de syntaxes:<br>
+&nbsp;&nbsp;&nbsp; "rules" : {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; "hour" : ["~give~ * hour"],<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; "date" : ["~give~ * date"]<br>
+&nbsp;&nbsp;&nbsp; }<br>
+<br>
+Il
+faut donc boucler pour trouver quelle action est à réaliser, ce qui
+peut
+se faire très simplement, (en prenant soins d'ajouter la variable
+globale <span style="font-style: italic;">_helpers</span>)<br>
+<br>
+<img style="width: 623px; height: 293px;" alt="Syntaxe multiple" title="Syntaxe multiple" src="images/js/SyntaxeMulltiple.png"><br>
+<br>
+Il suffit ensuite d'ajouter le nom du tableau de syntaxe trouvé comme
+un nouveau paramètre <tt style="font-weight: normal;"><span style="font-style: italic;">command</span></tt>
+qui deviendra l'action à exécuter et récupérable dans le plugin sous la
+fome <tt style="font-weight: normal;"><span style="font-style: italic;">data.action.command</span></tt>
+<br>
+<br>
+<img style="width: 581px; height: 168px;" alt="Syntaxe multiple 1" title="Syntaxe multiple 1" src="images/js/SyntaxeMulltiple1.png"><br>
+<br>
+Les possibilités sont très nombreuses et liées aux
+plugins que vous voulez créer. Elles peuvent être simples ou complexes.<br>
+Vous
+avez dans les fichiers action des plugins existants beaucoup d'exemples
+que vous pouvez utiliser pour vos plugins, vous pouvez aussi faires
+tous les tests ou fonctions que vous jugez bons. Il n'y a qu'une seule
+règle: <span style="font-weight: bold; text-decoration: underline;">récupérer
+et passer les informations dont votre plugin a besoin dans l'objet
+state.action.</span><br>
+<h4 style="color: rgb(153, 51, 153);" id="moreCreate">3.
+Un peu plus loin dans la
+création...</h4>
+Avatar
+permet, si vous le voulez, de ne pas exécuter de plugin après le
+fichier d'action de l'intention... eh oui.... avoir un plugin n'est pas
+une obligation.<br>
+Ceci est réservé à des choses simples, comme faire
+dire à Avatar l'heure qu'il est, par exemple. On voit bien là qu'avoir
+un plugin pour juste vocaliser une phrase est un luxe inutile. Il
+existe donc un certain nombre de clés que vous pouvez passer dans
+l'objet <span style="font-style: italic;">state.action</span>
+pour effectuer certaines actions, y compris juste vocaliser un tts sans
+avoir de plugin à exécuter.<br>
+<br>
+Ci-dessous toutes les clés de l'objet <span style="font-style: italic;">state.action</span> que
+vous pouvez passer dans les plugins ou directement pour vocaliser une
+phrase par exemple (sans passer par un plugin)<br>
+<br>
+<table style="text-align: left; height: 184px; width: 1000px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="text-align: center; background-color: rgb(255, 204, 153); font-weight: bold; width: 170px;">objet
+state.action</td>
+<td style="text-align: center; background-color: rgb(255, 204, 153); width: 62px;"><span style="font-weight: bold;">Type</span></td>
+<td style="background-color: rgb(255, 204, 153); font-weight: bold; text-align: center; width: 184px;">Obligatoire</td>
+<td style="background-color: rgb(255, 204, 153); text-align: center; font-weight: bold; width: 518px;">Description</td>
+</tr>
+<tr>
+<td style="width: 170px;">state.action.module</td>
+<td style="text-align: center; width: 62px;">String</td>
+<td style="text-align: center; width: 184px;">Non </td>
+<td style="width: 518px;">Nom du module à exécuter. <br>
+Si défini alors il doit exister comme plugin Avatar.</td>
+</tr>
+<tr>
+<td style="width: 170px;">state.action.tts</td>
+<td style="text-align: center; width: 62px;">Boolean</td>
+<td style="text-align: center; width: 184px;">Non</td>
+<td style="width: 518px;"><span style="font-weight: bold;">true</span>: &nbsp;Une
+phrase à vocaliser par Avatar.<br>
+<span style="font-weight: bold;">false</span>
+&nbsp;Non obligatoire, par défaut..<br>
+<br>
+Peut être associé avec <span style="font-style: italic;">state.action.module</span>,
+la phrase vocalisée est synchrone, le plugin sera exécuté seulement
+après la fin de la phrase.</td>
+</tr>
+<tr>
+<td style="width: 170px;">state.action.value</td>
+<td style="text-align: center; width: 62px;">String</td>
+<td style="text-align: center; width: 184px;">Oui si
+state.action.tts = true</td>
+<td style="width: 518px;">La phrase à prononcer par
+Avatar si <span style="font-style: italic;">state.action.tts</span><small>=</small><span style="color: rgb(0, 0, 102); font-weight: bold;">true</span></td>
+</tr>
+<tr>
+<td style="width: 170px;">state.action.no_end</td>
+<td style="text-align: center; width: 62px;">Boolean</td>
+<td style="text-align: center; width: 184px;">Non</td>
+<td style="width: 518px;">Lié à <span style="font-style: italic;">state.action.tts</span><br>
+<br>
+Cette
+propriété est lié à la possibilité de couper le son des périphériques
+automatiquement avant chaque phrase dictée/prononcée par l'utilisateur
+lors du déclenchement de l'écoute par le mot-clé (Ceci est fait pour
+avoir un dialogue clair et audible).<br>
+Par défaut, à la fin de la phrase ou du dialogue, le son des
+périphériques est remis automatiquement.<br>
+<br>
+Mais
+quelques fois, il est bon de contrôler la remise du son, par exemple:<br>
+<ol>
+<li>Faire prononcer une phrase à Avatar</li>
+<li>puis le plugin s'exécute, Avatar
+dans le plugin va prononcer encore quelques phrases...&nbsp;</li>
+<li>et à la fin, on
+remettra le son.</li>
+</ol>
+Pour ne pas remettre le son automatiquement après une phrase de <span style="font-style: italic;">state.action.value</span> :<br>
+<ul>
+<li>state.action.no_end=<span style="font-weight: bold; color: rgb(0, 0, 102);">true</span></li>
+</ul>
+<span style="font-weight: bold;">Note:</span>
+Ne pas oublier d'exécuter la fonction de remise du son dans le plugin</td>
+</tr>
+<tr>
+<td style="width: 170px;">state.action.norule</td>
+<td style="text-align: center; width: 62px;">Boolean</td>
+<td style="text-align: center; width: 184px;">Non
+utilisable</td>
+<td style="width: 518px;">Cette propriété n'est pas
+utilisable dans les actions. Donnée à titre indicatif.<br>
+Présente uniquement lorsque aucune intention n'a été trouvée.<br>
+<br>
+Le fichier d'action&nbsp; <tt style="font-weight: normal;"><span style="font-style: italic;">action.end.js</span></tt>&nbsp;est
+exécuté avec:<br>
+<ul>
+<li>state.action.tts = true</li>
+<li>&nbsp;state.action.value="Recommence, je n'ai pas
+compris"</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>state.action.&lt;<span style="font-style: italic;">Votre clé</span>&gt;</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td style="width: 518px;">Vous pouvez ajouter autant
+de propriétés que le plugin à besoin dans l'objet <span style="font-style: italic;">state.action</span></td>
+</tr>
+</tbody>
+</table>
+<br>
+<br>
+<h4 style="color: rgb(153, 51, 153);" id="stateObjet">4.
+L'objet state</h4>
+L'objet state est la chaine de tout le processus de l'intention et
+d'action.<br>
+Dans l'Action, l'objet <span style="font-style: italic;">state.action</span>
+est ajouté avec les paramètres puis <span style="font-style: italic;">state</span> est envoyé au
+plugin qui le recoit en paramètre <span style="font-style: italic;">data</span>.<br>
+<br>
+Mais en plus&nbsp;des paramètres&nbsp;ajoutés
+dans&nbsp;l'objet <span style="font-style: italic;">state.action,
+</span>il y a aussi <span style="text-decoration: underline;">t</span><span style="text-decoration: underline;">outes
+les caractéristiques de la règle dictée à Avatar</span><br>
+<ul>
+<ul>
+<li>La phrase dans le langage courant</li>
+</ul>
+<ul>
+<li>La phrase traduite en Anglais</li>
+</ul>
+<ul>
+<li>Le tableau des termes de la phrase découpée par NLP</li>
+</ul>
+<ul>
+<li>Le client courant</li>
+<li>et plein d'autres choses...</li>
+</ul>
+</ul>
+Ci-dessous, le tableau de résultats les plus importants de l'objet <span style="font-style: italic;">state</span> (<span style="font-style: italic;">data</span> dans la
+fonction <span style="font-style: italic;">export.action()</span>
+du plugin):<br>
+<table style="text-align: left; height: 184px; width: 998px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="width: 253px; color: black; font-weight: bold; background-color: rgb(255, 204, 153); text-align: center;">Objet</td>
+<td style="width: 123px; color: black; font-weight: bold; background-color: rgb(255, 204, 153); text-align: center;">Type</td>
+<td style="width: 570px; color: black; font-weight: bold; background-color: rgb(255, 204, 153); text-align: center;">Description</td>
+</tr>
+<tr>
+<td style="width: 253px;">state.rawSentence</td>
+<td style="width: 123px; text-align: center;">string</td>
+<td style="width: 570px;">La phrase dans le langage
+courant</td>
+</tr>
+<tr>
+<td style="width: 253px;">state.sentence</td>
+<td style="width: 123px; text-align: center;">string</td>
+<td style="width: 570px;">La phrase traduite en
+Anglais</td>
+</tr>
+<tr>
+<td>state.language</td>
+<td style="text-align: center;">string</td>
+<td>Code ISO (cca2) du langage courant</td>
+</tr>
+<tr>
+<td>state.type</td>
+<td style="text-align: center;">string</td>
+<td>Retourne le type de la phrase, soit: declarative,
+interrogative, exclamative<br>
+<span style="color: rgb(36, 41, 46); font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'; font-size: 16px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 24px; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); display: inline ! important; float: none;"></span></td>
+</tr>
+<tr>
+<td>state.topics</td>
+<td style="text-align: center;">array</td>
+<td>Tableau des termes les plus importants dans la phrase</td>
+</tr>
+<tr>
+<td style="width: 253px;">state.tokens</td>
+<td style="width: 123px; text-align: center;">array</td>
+<td style="width: 570px;">Tableau des termes de la
+phrase</td>
+</tr>
+<tr>
+<td style="width: 253px;">state.tags</td>
+<td style="width: 123px; text-align: center;">array</td>
+<td style="width: 570px;">Tableau des définitions
+des termes de la
+phrase</td>
+</tr>
+<tr>
+<td style="width: 253px;">state.relations</td>
+<td style="width: 123px; text-align: center;">object</td>
+<td style="width: 570px;">Contient les relations
+trouvées dans la phrase:<br>
+state.relations:<br>
+<ul>
+<li>subject</li>
+<li>adverb</li>
+<li>action</li>
+<li>object</li>
+<li>when</li>
+<li>location</li>
+<li>value</li>
+</ul>
+Permet de vérifier si des relations existent dans la phrase, comme par
+exemple si il y a un <span style="font-style: italic; font-weight: bold;">quand</span><span style="font-weight: bold;"> </span>avec un <span style="font-style: italic; font-weight: bold;">lieu</span><span style="font-weight: bold;"> </span>et une <span style="font-style: italic; font-weight: bold;">action</span>
+(et de récupérer les valeurs associées)<br>
+Utilisable avec la fonction <span style="font-style: italic; color: rgb(153, 0, 0);">helpers.relation()</span>
+dans un fichier d'action.<br>
+Pour un exemple d'utilisation, voir le fichier d'action&nbsp;<tt style="font-weight: normal;"><span style="font-style: italic;">action.forecast.msn.js</span></tt><br>
+Voir aussi le chapitre <a href="#APIMore">un peu plus ?</a></td>
+</tr>
+<tr>
+<td>state.sentiment</td>
+<td style="text-align: center;">Integer</td>
+<td>Contient l'humeur de la phrase:<br>
+-5 la plus négative, 0 neutre et +5 la plus positive<code style="margin: 0px; padding: 0.2em 0px; font-family: SFMono-Regular,Consolas,'Liberation Mono',Menlo,Courier,monospace; font-size: 14px; color: rgb(36, 41, 46); font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px;"></code></td>
+</tr>
+<tr>
+<td>state.client</td>
+<td style="text-align: center;">string</td>
+<td>Le nom du client qui a déclenché la fonction</td>
+</tr>
+<tr>
+<td>state.action</td>
+<td style="text-align: center;">objet</td>
+<td>L'objet ajouté dans l'action.<br>
+</td>
+</tr>
+</tbody>
+</table>
+<span style="font-weight: bold;"><br>
+<br>
+</span><span style="font-weight: bold;"></span>
+<h4 style="color: rgb(153, 51, 153);" id="actionEnd">5.
+L'action End</h4>
+<span style="font-weight: bold;"></span>Lorsqu'une
+phrase n'a pas pu être trouvée dans toute les intentions, l'action <tt style="font-weight: normal;"><span style="font-style: italic;">actionEnd</span></tt>
+est exécutée en dernier et affiche dans la console du serveur
+des&nbsp;informations.<br>
+Ces infomations vous permettent de voir les tokens et tags (voir l'<a href="#stateObjet">objet state</a>) découpés par NLP
+et ainsi de modifier&nbsp;dans des tableaux de règles que vous avez
+définies&nbsp;ce qui n'est pas correct.<br>
+<br>
+<img style="width: 641px; height: 90px;" alt="action end" title="action end" src="images/action%20end.png"><br>
+<br>
+<br>
+<h2 style="color: rgb(51, 204, 255);" id="ReordonnePlugins">Réordonner
+l'ordre
+des plugins pour NLP</h2>
+<span style="color: rgb(153, 51, 153);">&nbsp;</span>La
+prise en compte des plugins est séquentielle lors de l'initialisation
+du Traitement Naturel du Langage.<br>Par
+conséquent, la recherche d'une règle se fait séquentiellement dans tous
+les plugins de votre bibliothèque, les uns après les autres.<br>Le
+temps de recherche d'une règle et le traitement de l'action associée
+peut devenir très long (quelques secondes) suivant le nombre de plugins
+et de règles que vous avez.<br>Pour accélérer les temps de réponses
+pour les plugins les plus utilisés, vous pouvez leurs donner un ordre
+de chargement pour que leurs règles soient trouvées en
+premier.Retrouvez cette possibilité dans l'interface AVATAR et son menu
+contextuel "Plugins" -&gt; "Ordonner les plugins".<br><span style="font-weight: bold;">Remarque</span>: Ceci définie automatiquement la propriété "nlpPosition" dans les fichiers de propriétés (voir ci-dessous).<br><br>Quelques fois, il peut
+arriver
+aussi qu'il y ait des conflits entre les règles de plusieurs plugins, par
+exemple:<br>
+Supposons les 2 plugins suivants:
+<ul>
+<li>Time</li>
+<li>Translate </li>
+</ul>
+Nous pourrions très bien demander une traduction avec la phrase
+suivante:<br>
+<div style="margin-left: 40px; font-style: italic;">Traduis
+en anglais quelle heure est-il</div>
+Et demander l'heure:<br>
+<div style="margin-left: 40px;"><span style="font-style: italic;">Quelle heure est-il</span></div>
+<br>
+Le problème est que pour demander l'heure, nous avons le même terme
+dans le phrase: <span style="font-weight: bold;">heure</span>
+et que comme la prise en compte des plugins est séquentielle, nous
+risquons de ne jamais nous faire comprendre par Avatar lorsque nous
+demandons une traduction si le plugin Time est pris en compte <span style="font-weight: bold;">avant</span> le
+plugin Translate. Pourquoi ? Simplement parce que il y a moins de terme
+dans la règle pour demander l'heure que dans la règle de traduction
+pour valider l'intention.<br>
+<br>
+Par contre, si le plugin Translate est
+toujours avant le plugin Time, NLP devra valider plus de mots pour en
+valider l'intention, soit: <span style="font-weight: bold;">Traduis
+en anglais... heure...</span>&nbsp; et s'il ne trouve pas,
+alors il passera au plugin suivant Time.<br>
+Par
+conséquent, lorsqu'il y a une possibilité de conflit, il est nécessaire
+de définir un ordre de prise en compte des plugins dans NLP et définir
+toujours les règles les plus longues <span style="font-weight: bold;">devant</span> les règles
+les plus courtes.<br>
+<br>
+Lorsqu'il n'y a pas de possibilité de conflit, il n'est pas nécessaire
+d'ajouter un ordre. <span style="font-weight: bold; text-decoration: underline;">Ce
+n'est pas obligatoire</span>.<br>
+<br>
+Pour définir un ordre de prise en compte dans NLP pour <span style="font-weight: bold; text-decoration: underline;">un
+seul fichier d'intention</span> dans le plugin:<br>
+<ul>
+<li>Ouvrez le fichier de propriétés du plugin</li>
+<li>Ajoutez une propriété <tt style="font-weight: normal;"><span style="font-style: italic;">"nlpPosition"</span></tt>en
+haut et sous&nbsp;l'objet &lt;<span style="font-style: italic;">nom du module</span>&gt;
+avec un <span style="font-weight: bold;">entier</span>
+qui représente <span style="font-weight: bold;">sa
+position</span>.</li>
+</ul>
+Par exemple, nous voulons que le plugin Translate soit toujours en 1ère
+position:<br>
+<br>
+<div style="margin-left: 40px;">"translate"&nbsp; : {<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+"description": "traducteur
+automatique du francais vers un max de langues",<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+"exemple": "traduit en polonais bonjour je suis un traducteur que
+puis-je pour vous?",<br>
+<span style="color: rgb(204, 0, 0);">&nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;<span style="color: rgb(153, 0, 0);"> "nlpPosition" : 1,</span></span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+"rules" : {<br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;
+"translate" : ["(~translate~|translated) * [Preposition]? [Demonym]"]<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;&nbsp; },</div>
+<br>
+Et pour le plugin Time, nous voulons qu'il soit en 2ème position:<br>
+<div style="margin-left: 40px;">&nbsp;"time"&nbsp;
+: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "description":
+"Donne l'heure pour tous les pays du monde",<br>
+&nbsp;&nbsp;&nbsp; &nbsp; "exemple": "Quelle heure
+est-il à Los Angles, il est quelle heure, donne-moi l'heure à Bangkok",<br>
+&nbsp;&nbsp;&nbsp; &nbsp;<span style="color: rgb(153, 0, 0);"> "nlpPosition" : 2</span><br>
+&nbsp;&nbsp;&nbsp; }</div>
+<br>
+<br>
+<br>
+<br>
+Pour définir un ordre de prise en compte dans NLP avec <span style="font-weight: bold; text-decoration: underline;">plusieurs&nbsp;fichiers
+d'intention</span> dans le plugin:<br>
+<ul>
+<li>Ouvrez le fichier de propriétés du plugin</li>
+<li>Ajoutez une propriété <tt style="font-weight: normal;"><span style="font-style: italic;">"nlpPosition"</span></tt>en
+haut et sous&nbsp;l'objet &lt;<span style="font-style: italic;">nom du module</span>&gt;
+avec un objet qui représente <span style="font-weight: bold;">les
+noms des&nbsp;intentions et</span> <span style="font-weight: bold;">leurs positions</span>.</li>
+</ul>
+Par exemple, le plugin Scenariz a 2 fichiers d'intention et nous
+voulons que l'intention <span style="font-style: italic;">manage</span>
+soit toujours en 3ème position et <span style="font-style: italic;">rules</span>
+en 4ème:<br>
+<div style="margin-left: 40px;">"scenariz"&nbsp; : {<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; "description": "Gestion de scenarios",<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; "nlpPosition" : {
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;
+"manage" : 3,<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp; "rules" : 4<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; },</div>
+<br>
+<br>
+<br>
+<h1 style="color: rgb(102, 102, 102);" id="Plugin">Les
+plugins</h1>
+<span style="font-weight: bold;">Un petit rappel:</span><br>
+Si le plugin est lié à une règle vocale, il est nécessaire d'avoir créé
+avant:<br>
+<ul>
+<li><a href="#Intent">Un fichier d'intention</a></li>
+<li><a href="#Action">Un fichier d'action</a></li>
+</ul>
+Si vous n'avez pas lu les chapitres associés, je vous propose de le
+faire maintenant...<br>
+<br>
+Un plugin est créé dans le répertoire <tt style="font-weight: normal;">c:\<span style="font-style: italic;">Dossier
+d'install du serveur\plugins\</span></tt> du serveur Avatar
+et ne doit pas avoir d'espace dans son nom. <br>
+<tt style="font-weight: normal;">c:\<span style="font-style: italic;">Avatar\server\plugins\monplugin</span></tt>
+est correct mais <tt style="font-weight: normal;">c:\<span style="font-style: italic;">Avatar\server\plugins\mon plugin</span></tt>
+n'est pas correct.<br>
+<br>
+Il est constitué de 2 fichiers au minimum:<br>
+<ul>
+<li>Un fichier javascript (.js)</li>
+<li>Un fichier de propriétés (.prop)</li>
+</ul>
+<h2 style="color: rgb(51, 204, 255);" id="javascript">Le
+fichier javascript du plugin</h2>
+Doit être nommé avec un nom identique au nom du répertoire du plugin.<br>
+Par exemple, dans un répertoire <tt style="font-weight: normal;">c:\<span style="font-style: italic;">Avatar\server\plugins\monplugin</span></tt>
+le fichier javascript sera <tt style="font-weight: normal;">c:\<span style="font-style: italic;">Avatar\server\plugins\monplugin\monplugin.js</span></tt><br>
+<br>
+<span style="font-weight: bold;">Important:</span>
+Depuis la version 3.0 d'AVATAR, le fichier js du plugin est
+automatiquement créé par l'action "<span style="font-style: italic;">Créer
+un plugin</span>" depuis le "<span style="font-style: italic;">Plugin
+Studio</span>"
+du menu d'AVATAR Serveur. Suivant les réponses du template de création,
+vous pouvez créer un fichier js plus ou moins complexe pour votre
+plugin. Néanmoins, cette création automatique ne permet pas toutes les
+possibilités. Les fonctions qui peuvent être automatiquement créées par
+l'action "<span style="font-style: italic;">Créer un plugin</span>"
+&nbsp;sont <span style="font-style: italic;">action</span>(),
+<span style="font-style: italic;">init</span>() et <span style="font-style: italic;">cron</span>(), les autres
+fonctions possibles doivent être ajoutées à la main.<br>
+<br>
+Ci-dessous les fonctions (obligatoires ou non) exportées et gérées par
+le core d'Avatar pouvant être ajoutées
+dans un plugin:<br>
+<h3 style="color: rgb(204, 51, 204);" id="actionfunc">action(<span style="font-style: italic;">data</span>,
+<span style="font-style: italic;">callback</span>)</h3>
+La seule fonction&nbsp;<span style="font-weight: bold;">obligatoire</span>
+du plugin.<br>
+<br>
+<pre><span style="font-style: italic;">exports.action = function (data, callback) {</span><span style="font-style: italic;"><br><br> info ('Mon action: ', data.action.command, 'from:', data.client);<br> callback();<br><br>}<br></span></pre>
+<h4>Paramètre <span style="font-style: italic;">data:</span></h4>
+<table style="text-align: left; width: 783px; height: 124px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="width: 202px; font-weight: bold; text-align: center; background-color: rgb(255, 204, 153);">Paramètre</td>
+<td style="width: 756px; font-weight: bold; text-align: center; background-color: rgb(255, 204, 153);">Description</td>
+</tr>
+<tr>
+<td style="width: 202px;">data.action</td>
+<td style="width: 756px;">Contient tous les
+paramètres définis pour le plugin:<br>
+<ul>
+<li>Les paramètres&nbsp;provenant de <a href="#Action">l'action</a> d'une <a href="#Intent">intention</a></li>
+<ul>
+<li>Par exemple, l'objet <a href="#stateObjet"><span style="font-style: italic;">state</span></a> de
+l'action de l'intention contient un objet<span style="font-style: italic;"> command</span>, celui-ci
+sera accessible par <span style="font-style: italic;">data.action.command</span></li>
+</ul>
+<li>Les paramètres provenant d'un HTTP GET</li>
+</ul>
+<ul>
+<ul>
+<li>Par exemple, la requète HTTP<span style="font-style: italic;">
+http://ip:3000/monplugin?command=monaction&amp;value=1,&nbsp;</span>le
+paramètre <span style="font-style: italic;">command</span>
+sera accessible par&nbsp;<span style="font-style: italic;">data.action.command
+</span>et <span style="font-style: italic;">value</span>
+par&nbsp;<span style="font-style: italic;">data.action.value</span></li>
+</ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="width: 202px;">data.client</td>
+<td style="width: 756px;">Contient le nom du client
+qui exécute le plugin</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h4>Paramètre <span style="font-style: italic;">callback</span></h4>
+Ce paramètre "chaine" les appels de plugins dans Avatar. Il doit
+toujours être présent et appelé une fois.<br>
+<br>
+<br>
+<h3 style="color: rgb(204, 51, 204);" id="initfunc">init()</h3>
+<span style="font-weight: bold;">Non obligatoire</span>,
+si cette&nbsp;fonction existe, elle est&nbsp;exécutée au
+démarrage d'Avatar
+Serveur et <span style="font-weight: bold; text-decoration: underline;">avant</span>
+la fonction <span style="font-style: italic;">action</span>()<br>
+On s'en servira donc pour initialiser au démarrage certains paramètres,
+de charger des modules nodejs, d'ajouter des modules d'écoutes
+(fonction listen), définir des variables globales, etc...<br>
+<br>
+<pre><span style="font-style: italic;">var debug;<br>exports.init = function () {<br> // Do STUFF...<br> // Un exemple...<br> debug = Config.modules.monplugin.debug;<br>}</span></pre>
+<br>
+<h3 style="color: rgb(204, 51, 204);" id="cronfunc">cron(<span style="font-style: italic;">data</span>)</h3>
+<span style="font-weight: bold;">Non obligatoire</span>,si
+cette&nbsp;fonction existe, elle est exécutée par un cron à horaire
+fixe qui est
+paramétré dans le fichier de propriétés du plugin (voir ci-dessous).<br>
+<br>
+<pre><span style="font-style: italic;">exports.cron = function (data) {<br><br> info("c'est l'heure d'exécuter une tâche...");<br><br>}</span></pre>
+<h4>Paramètre <span style="font-style: italic;">data</span></h4>
+Objet contenant les informations du cron définies dans le fichier de
+propriétés du plugin<br>
+<br>
+<br>
+<h3 style="color: rgb(204, 51, 204);" id="mutefunc">mute(<span style="font-style: italic;">clientFrom, clientTo</span>)</h3>
+<span style="font-weight: bold;">Non obligatoire</span>,
+si cette&nbsp;fonction existe, elle est&nbsp;exécutée juste
+avant qu'AVATAR passe en mode écoute.<br>
+Parfaite
+pour couper le son d'un périphérique lié au plugin (son, télévision...)
+afin de faire le silence et permettre une meilleure compréhension lors
+d'un dialogue.<br>
+<br>
+<pre><span style="font-style: italic;">exports.mute = function (clientFrom, clientTo) {<br><br> if (clientFrom &amp;&amp; clientTo) {<br>	// exécute seulement si ce n'est pas un client Android </span><span style="font-style: italic;">et uniquement pour le client 'Chambre'<br></span><span style="font-style: italic;">&nbsp; if (Avatar.isMobile(clientFrom) || clientTo.toLowerCase() != 'chambre') {<br>	return;<br>	}<br>	// Exécute l'action, ici une fonction du plugin qui coupe le son du périphérique<br>	send_key('mute');<br> }<br><br>}</span></pre>
+<h4>Paramètre&nbsp;<span style="font-style: italic;">clientFrom</span></h4>
+Le client qui a passé la règle.<br>
+<h4>Paramètre&nbsp;<span style="font-style: italic;">clientTo</span></h4>
+Le client courant (clientFrom ou défini par la variable <span style="font-style: italic;">Avatar.currentRoom</span>)<br>
+.<br>
+<h3 style="color: rgb(204, 51, 204);" id="unmutefunc">unmute(<span style="font-style: italic;">clientFrom, clientTo</span>)</h3>
+<span style="font-weight: bold;">Non obligatoire</span>,
+si cette&nbsp;fonction existe, elle est&nbsp;exécutée juste
+après qu'AVATAR repasse en mode silence.<br>
+Parfaite
+pour remettre le son d'un périphérique lié au plugin (son,
+télévision...)
+afin de restitué le son si il a été coupé avec la fonction mute()<br>
+<br>
+<pre><span style="font-style: italic;">exports.unmute = function (clientFrom, clientTo) {<br><br> if (clientFrom &amp;&amp; clientTo) {<br>	// exécute seulement si ce n'est pas un client Android et uniquement pour le client 'Chambre'<br>	if (Avatar.isMobile(clientFrom) || clientTo.toLowerCase() != 'chambre') {<br>	return;<br>	}<br>	// Exécute l'action, ici une fonction du plugin qui remet le son du périphérique<br>	send_key('mute');<br> }<br><br>}</span></pre>
+<h4>Paramètre&nbsp;<span style="font-style: italic;">clientFrom</span></h4>
+Le client qui a passé la règle.<br>
+<h4>Paramètre&nbsp;<span style="font-style: italic;">clientTo</span></h4>
+Le client courant (clientFrom ou défini par la variable <span style="font-style: italic;">Avatar.currentRoom</span>)<br>
+<br>
+<br>
+<h3 style="color: rgb(204, 51, 204);" id="addPluginElementsfunc">addPluginElements
+(CY)</h3>
+<span style="font-weight: bold;">Non obligatoire</span>,
+si cette&nbsp;fonction existe, elle est exécutée pendant
+l'affichage de l'interface d'AVATAR Serveur.<br>
+Utilisé pour ajouter dans l'interface des éléments nodes graphiques
+et/ou d'une interface HTML liés au plugin.<br>
+<span style="font-weight: bold;"><br>
+Note</span>: &nbsp;<br>
+Vous disposez d'un module 'cyto-avatar' permettant une gestion
+simplifiée d'ajout, de gestion et de sauvegarde de nodes.<span style="font-weight: bold;"> </span><br>
+Vous
+pouvez récupérer ce module 'cyto-avatar' dans le plugin d'exemple
+'cyto-demo' depuis la bibliothèque de plugins. Toutes les fonctions
+possibles sont clairement expliquées dans le module.<br>Utilisez
+aussi comme exemples des plugins tels que "Avatar-Plugin-eeDomus",
+"Avatar-Plugin-scenariz", "Avatar-Plugin-SonosPlayer" <a href="https://github.com/Spikharpax?tab=repositories">ICI !</a><br>
+Plus d'infos sur les nodes cytoscape sur http://js.cytoscape.org/<br>
+<br>
+<pre><span style="font-style: italic;">const {Graph} = require('cyto-avatar');<br>// global Graph<br>let cyto;<br><br>exports.addPluginElements = function(CY) {<br><br> // init variable globale module Graph<br> cyto = new Graph (CY, __dirname);<br><br> // Chargement des éléments sauvegardés<br> cyto.loadAllGraphElements()<br> .then(elems =&gt; {<br> if (!elems || elems.length == 0) {<br>	// Aucun node sauvegardé, création...<br> addGraph(cyto)<br> .then(elem =&gt; cyto.onClick(elem, (evt) =&gt; {<br> // DO STUFF ON LEFT CLICK<br> }))<br> .catch(err =&gt; {<br> console.log('err:', err || 'erreur dans la création de l\'élément Sonos');<br> })<br> } else {</span><br>	// 1 éléement node présent sauvegardé<span style="font-style: italic;"></span><span style="font-style: italic;"><br> cyto.onClick(elems[0], (evt) =&gt; {</span><br><span style="font-style: italic;"> // DO STUFF ON LEFT CLICK</span><span style="font-style: italic;"> </span><span style="font-style: italic;"> <br> showAddTitle();<br> });<br> }<br> })<br><br>}</span></pre>
+<h4>Paramètre&nbsp;<span style="font-style: italic;">CY</span></h4>
+Le graph de l'interface AVATAR<br>
+<br>
+<br>
+<h3 style="color: rgb(204, 51, 204);" id="onAvatarClosefunc">onAvatarClose&nbsp;(callback)</h3>
+<span style="font-weight: bold;">Non obligatoire</span>,
+si cette&nbsp;fonction existe, elle est exécutée lors de la
+fermeture d'AVATAR Serveur.<br>
+Utilisé
+pour sauvegarder des informations liés au plugin avant l'arrêt d'AVATAR
+comme par exemple la sauvegarde de node(s)&nbsp;lié au plugin et
+créés par
+la fonction <span style="font-style: italic;">addPluginElements</span>().<br>
+<span style="font-weight: bold;"></span><br>
+<pre><span style="font-style: italic;">const {Graph} = require('cyto-avatar');<br>// global Graph, init dans la fonction addPluginElements()<br>let cyto;<br><br>exports.onAvatarClose = function(callback){<br><br> // Pour exemple: Sauvegarde seulement les éléments de classe 'cyto' (ici, l'élément '</span><span style="font-style: italic;">cyto</span><span style="font-style: italic;">')<br> cyto.saveAllGraphElements("cyto")<br> .then(() =&gt; {<br> // Obligatoire, chaine onAvatarClose pour tous les plugins<br> callback();<br> })<br> .catch(err =&gt; {<br> console.log('Error saving Elements', err)<br> // Obligatoire, chaine onAvatarClose pour tous les plugins<br> callback();<br> })<br><br>}</span></pre>
+<h4>Paramètre&nbsp;<span style="font-style: italic;">callback</span></h4>
+Ce paramètre "chaine" les appels de cette fonction pour tous les
+plugins dans Avatar. Il doit
+toujours être présent et appelé une fois (même en cas d'erreur, voir
+l'exemple).<br>
+<br>
+<br>
+<h3 style="color: rgb(204, 51, 204);" id="subclassSpeakfunc">subclassSpeak&nbsp;()</h3>
+<span style="font-weight: bold;">Non obligatoire</span>,
+si cette&nbsp;fonction existe, elle est exécutée <span style="font-weight: bold; text-decoration: underline;"></span>au
+chargement d'AVATAR Serveur.<br>
+Utilisé
+pour surclasser la fonction <span style="font-style: italic;">speak</span>()
+d'AVATAR pour utiliser un autre système d'enceintes comme par exemple
+le
+système de son Sonos. Vos enceintes doivent pouvoir être gérées en WIFI
+ou par UPNP ou encore avoir une API vous facilitant leurs accès.<br>
+<br>
+<span style="font-weight: bold;">Note</span>:
+La gestion d'un autre système de son n'est pas aisée. Vous devez avoir
+un bon niveau de développement. Si vous voulez vous essayer, vous avez
+un très bon exemple dans le plugin SonosPlayer pour lequel la gestion
+de la fonction <span style="font-style: italic;">speak()</span>
+est surclassée pour être envoyée sur des enceintes Sonos. Vous pouvez
+retrouver dans ce plugin tout ce qui doit être fait afin d'avoir un
+système viable.<br>
+.<br>
+<pre><span style="font-style: italic;"></span><span style="font-style: italic;">exports.subclassSpeak = function() {<br>	<br> // sauvegarde la fonction speak() d'AVATAR<br> let defaultSpeak = Avatar.speak;<br> <br> // Nouvelle fonction speak()<br> Avatar.speak = function() {<br><br>	// Récupération et traitement des paramètres du speak envoyé par AVATAR<br> let tts = arguments[0] !== 'string' &amp;&amp; arguments.length &lt; 2 ? null : arguments[0];<br> let client = arguments.length &gt;= 2 &amp;&amp; typeof arguments[1] !== 'string' ? null : arguments[1];<br> let callback = arguments.length &gt;= 3 &amp;&amp; typeof arguments[2] !== 'function' ? null : arguments[2];<br> let end;<br> if (callback)<br> end = arguments.length == 4 &amp;&amp; typeof arguments[3] === 'boolean' ? arguments[3] : false;<br> else<br> end = arguments.length == 3 &amp;&amp; typeof arguments[2] === 'boolean' ? arguments[2] : false;<br><br> if (!client)<br> return warn('speak: Paramètre client manquant');<br> if (!tts)<br> return warn('speak: Paramètre tts manquant');<br><br> if (Avatar.isMobile(client)) {<br> if (!Avatar.Socket.isServerSpeak(client)) {<br> return defaultSpeak(tts,client,callback);<br> } else {<br> client = Avatar.currentRoom ? Avatar.currentRoom : Config.default.client;<br> }<br> }<br>	<br>	// Si un test n'est pas bon, alors exécution du speak normal d'AVATAR<br>	if (!Avatar.Socket.isServerSpeak(client))<br> return defaultSpeak(tts,client,callback);<br><br> // Sinon, exécution du nouveau speak....<br> // DO STUFF<br><br> }<br><br>}</span></pre>
+<h3 style="color: rgb(204, 51, 204);" id="subclassPlayfunc">subclassPlay&nbsp;()</h3>
+<span style="font-weight: bold;">Non obligatoire</span>,
+si cette&nbsp;fonction existe, elle est exécutée <span style="font-weight: bold; text-decoration: underline;"></span>au
+chargement d'AVATAR Serveur.<br>
+Utilisé
+pour surclasser la fonction <span style="font-style: italic;">play</span>()
+d'AVATAR pour utiliser un autre système d'enceintes comme par exemple
+le
+système de son Sonos. Vos enceintes doivent pouvoir être gérées en WIFI
+ou par UPNP ou encore avoir une API vous facilitant leurs accès.<br>
+<br>
+<span style="font-weight: bold;">Note</span>:
+La gestion d'un autre système de son n'est pas aisée. Vous devez avoir
+un bon niveau de développement. Si vous voulez vous essayer, vous avez
+un très bon exemple dans le plugin SonosPlayer (<a href="https://github.com/Spikharpax/Avatar-Plugin-SonosPlayer">ICI !</a>) pour lequel la gestion
+de la fonction <span style="font-style: italic;">play()</span>
+est surclassée pour être envoyée sur des enceintes Sonos. Vous pouvez
+retrouver dans ce plugin tout ce qui doit être fait afin d'avoir un
+système viable.<br>
+.<br>
+<pre><span style="font-style: italic;">exports.subclassPlay = function() {</span><br><br><span style="font-style: italic;"> // sauvegarde la fonction play() d'AVATAR<br></span><span style="font-style: italic;">&nbsp; let defaultplay = Avatar.play;<br><br> Avatar.play = function() {<br> let playfile = arguments[0] !== 'string' &amp;&amp; arguments.length &lt; 2 ? null : arguments[0];<br> let client = arguments.length &gt;= 2 &amp;&amp; typeof arguments[1] !== 'string' ? null : arguments[1];<br> let callback = arguments.length &gt;= 3 &amp;&amp; typeof arguments[2] !== 'function' ? null : arguments[2];<br> let end;<br> if (callback)<br> end = arguments.length == 4 &amp;&amp; typeof arguments[3] === 'boolean' ? arguments[3] : false;<br> else<br> end = arguments.length == 3 &amp;&amp; typeof arguments[2] === 'boolean' ? arguments[2] : false;<br><br> if (!client)<br> return warn('Sonos Play: Paramètre client manquant');<br><br> if (!playfile)<br> return warn('Sonos Play: Paramètre file manquant');<br><br> if (Avatar.isMobile(client)) {<br> if (!Avatar.Socket.isServerSpeak(client)) {<br> return defaultSpeak(tts,client,callback);<br> } else {<br> client = Avatar.currentRoom ? Avatar.currentRoom : Config.default.client;<br> }<br> }<br><br> let serverSpeak = _.find(Config.modules.SonosPlayer.mapped_client_speak, function(num){<br> return client == num;<br> });<br><br> let logClient = client;<br> let mapped = _.find(Config.default.mapping, function(num){<br> return client == num.split(',')[0];<br> });<br><br> if (mapped &amp;&amp; !serverSpeak) {<br> client = mapped.split(',')[1];<br> }<br>	</span><br><span style="font-style: italic;"> // Si un test n'est pas bon, alors exécution du speak normal d'AVATAR<br></span><span style="font-style: italic;">&nbsp; if (!Avatar.Socket.isServerSpeak(client) &amp;&amp; !serverSpeak)<br> return defaultplay(playfile,client,callback);</span><span style="font-style: italic;"><br></span><span style="font-style: italic;"> <br> // Sinon, exécution du nouveau speak....<br> // DO STUFF<br><br> }<br><br>}</span></pre>
+<h3 style="color: rgb(204, 51, 204);" id="getPluginPathfunc">getPluginPath&nbsp;()</h3>
+<span style="font-weight: bold;">Obligatoire</span> <span style="font-weight: bold;">si la fonction </span><span style="font-style: italic; font-weight: bold;">play</span><span style="font-weight: bold;">() est surclassée</span>.
+Si cette&nbsp;fonction existe, elle est exécutée <span style="font-weight: bold; text-decoration: underline;"></span>au
+chargement d'AVATAR Serveur.<br>
+Retourne à AVATAR le path du plugin si la fonction Play est surclassé
+afin de créer un répertoire de création de fichiers sons&nbsp; dans
+le path+'/tts' du plugin.<br>
+<br>
+<pre><span style="font-style: italic;">exports.getPluginPath = function() {<br><br></span> // Retourne le path du plugin<br><span style="font-style: italic;"> return path.resolve(__dirname);<br><br>}</span></pre>
+<h3 style="color: rgb(204, 51, 204);" id="timeoutCallbackEndfunc">timeoutCallbackEnd&nbsp;(clientFrom,
+clientTo)</h3>
+<span style="font-weight: bold;">Non obligatoire</span><span style="font-weight: bold;"></span><span style="font-weight: bold;"></span>. Si
+cette&nbsp;fonction existe, elle est exécutée <span style="font-weight: bold; text-decoration: underline;"></span>au
+chargement d'AVATAR Serveur.<br>
+Uniquement si voulez qu"un&nbsp;<span style="font-style: italic;">Avatar.speak.end</span>()
+dans le plugin ait un callback et appliquer un timeout avant d'exécuter
+ce callback (voir plus bas la fonction end).<br>
+<br>
+<pre><span style="font-style: italic;">exports.timeoutCallbackEnd = function(clientFrom, clientTo) {<br><br></span> // Défini un timeout au callback de la fonction end() pour temporiser le callback<br><span style="font-style: italic;"> let timeout = Config.modules.SonosPlayer.speech.add_timeout_callback_end * 1000;<br> info('Sonos timeout:', timeout.toString(), "ms");<br> return timeout;<br><br>}</span><span style="font-style: italic;"></span></pre>
+<h4>Paramètre&nbsp;<span style="font-style: italic;">clientFrom</span></h4>
+Le client qui a passé la règle.<br>
+<h4>Paramètre&nbsp;<span style="font-style: italic;">clientTo</span></h4>
+Le client courant (clientFrom ou défini par la variable <span style="font-style: italic;">Avatar.currentRoom</span>)<br>
+<br>
+<h3 style="color: rgb(204, 51, 204);" id="unresizefunc">unresize
+()</h3>
+<span style="font-weight: bold;">Non obligatoire</span><span style="font-weight: bold;"></span><span style="font-weight: bold;"></span>. Si
+cette&nbsp;fonction existe, elle est exécutée <span style="font-weight: bold; text-decoration: underline;"></span>au
+chargement d'AVATAR Serveur.<br>
+Uniquement si voulez que les nodes définis dans le plugin ne soient pas
+redimensionnés avec la fenêtre principale d'Avatar lorsque celle-ci est
+&nbsp;modifiée.<br>
+<pre><span style="font-style: italic;">exports.unresize = function(callback) {</span><br><span style="font-style: italic;"> // Ignore les nodes avec la classe </span><span style="font-style: italic;">'eeDomusWidget'</span><span style="font-style: italic;"> <br> callback (['eeDomusWidget']);<br>}<br><br></span><span style="font-style: italic;">exports.unresize = function(callback) {<br> // Ignore tous les nodes<br></span><span style="font-style: italic;"> callback (['ALL']);<br>}</span><br><br><span style="font-style: italic;">exports.unresize = function(callback) {<br></span><span style="font-style: italic;">// Ignore les nodes avec les classes </span><span style="font-style: italic;">'eeDomusWidget'</span><span style="font-style: italic;"> </span>et <span style="font-style: italic;">'eeDomusNode'<br></span><span style="font-style: italic;">&nbsp;callback (['eeDomusWidget', 'eeDomusNode']);<br>}</span></pre>
+<h4>Paramètre&nbsp;<span style="font-style: italic;">callback</span></h4>
+Un tableau avec les noms de classes des nodes à ignorer ou "ALL" pour
+tous les nodes d'Avatar, y compris les nodes serveur et clients.<br>
+<h3 style="color: rgb(204, 51, 204);" id="beforeNodeMenufunc">beforeNodeMenu&nbsp;()</h3>
+<span style="font-weight: bold;">Obligatoire si on défini
+un node avec un menu</span><span style="font-weight: bold;"></span><span style="font-weight: bold;"></span>. <br>
+Si
+cette&nbsp;fonction existe, elle est exécutée <span style="font-weight: bold; text-decoration: underline;"></span>au
+chargement d'AVATAR Serveur et avant l'affichage des menus contextuels
+des nodes dans l'interface Avatar.<br>
+En général, lorsque un menu contextuel est défini pour un node, on
+supprime le menu créé par 'cytoscape-cxtmenu' sinon tous les nodes
+Avatar des autres plugins auraient ce menu. Retrouvez un exemple
+d'utilisation dans le plugin <span style="font-style: italic;">SonosPlayer</span><br>
+<br>
+<pre><span style="font-style: italic;">exports.beforeNodeMenu = function(CY, cytoscape) {<br>	if (menu) {<br>	menu.destroy();<br>	menu = null;<br>	}<br>}</span><span style="font-style: italic;"></span></pre>
+<h2 style="color: rgb(51, 204, 255);" id="prop"></h2>
+<h2 style="color: rgb(51, 204, 255);" id="prop">Le
+fichier de propriétés</h2>
+Il doit être nommé avec un nom identique au nom du répertoire du plugin.<br>
+Par exemple, dans un répertoire <tt style="font-weight: normal;">c:\<span style="font-style: italic;">Avatar\server\plugins\monplugin</span></tt>
+le fichier de propriétés sera <tt style="font-weight: normal;">c:\<span style="font-style: italic;">Avatar\server\plugins\monplugin\monplugin.prop</span></tt><br>
+Le fichier de propriétés est un fichier au format JSON dans le
+répertoire du plugin avec une extention <tt style="font-weight: normal;"><span style="font-style: italic;">.prop</span></tt><br>
+<br>
+<span style="font-weight: bold;">Important:</span>
+Depuis la version 3.0 d'AVATAR, le fichier de propriétés du plugin est
+automatiquement créé par l'action "<span style="font-style: italic;">Créer
+un plugin</span>" depuis le "<span style="font-style: italic;">Plugin
+Studio</span>"
+du menu d'AVATAR Serveur. Suivant les réponses du template de création,
+vous pouvez créer un fichier de prorpiétés plus ou moins complexe avec
+votre
+plugin. Néanmoins, je vous conseille vivement de lire les chapitres
+suivants pour appréhender toutes les possibilités.
+<h3 style="color: rgb(204, 51, 204);" id="modules">L'objet
+<span style="font-style: italic;">modules.&lt;monplugin&gt;</span></h3>
+<span style="font-weight: bold;">Obligatoire</span><span style="font-style: italic;"><span style="font-weight: bold;">,</span>
+l'objet&nbsp;Modules</span> contient toutes les propriétés du
+plugin que vous voulez facilement paramètrables.<br>
+<br>
+<img style="width: 449px; height: 253px;" alt="modules" title="modules" src="images/js/modules.png"><br>
+<br>
+<br>
+Remplacez "monplugin" par le nom de votre plugin. Dessous sont définies
+toutes les propriétés du plugin.<br>
+Les propriétés d'un plugin sont accessibles dans le javascript par la
+variable globale <span style="font-style: italic;">Config</span>.<span style="font-style: italic;">modules</span><br>
+Par exemple, si je veux accèder au tableau "rule1", j'utiliserais: <span style="font-style: italic;">Config.modules.monplugin.rules.rule1</span><br>
+<br>
+<h3 style="color: rgb(204, 51, 204);" id="cron">L'objet
+<span style="font-style: italic;">cron.&lt;monplugin&gt;</span></h3>
+<span style="font-weight: bold;">Non obligatoire,</span>
+paramètre un cron à horaire fixe pour le plugin.<br>
+Associé à la fonction <span style="font-style: italic;">export.cron(data)</span>
+du javascript.<br>
+<br>
+<img style="width: 469px; height: 392px;" alt="crontab" title="crontab" src="images/js/crontab.png"><br>
+<br>
+Remplacez "monplugin" par le nom de votre plugin. Dessous sont définies
+toutes les propriétés du cron.<br>
+La propriété&nbsp;<span style="font-style: italic;">time
+</span>permet de définir l'exécution du cron à horaire fixe et
+doit respecter cette notation:
+<p><span style="font-style: italic;">mm hh jj MMM
+JJJ </span><br>
+</p>
+<ul>
+<li><tt>mm</tt> représente les minutes (de 0 à 59)</li>
+<li><tt>hh</tt> représente l'heure (de 0 à 23)</li>
+<li><tt>jj</tt> représente le numéro du jour du
+mois (de 1 à 31)</li>
+<li><tt>MMM</tt> représente l'abréviation du nom du
+mois (jan, feb, ...) ou bien le numéro du mois (de 1 à 12)</li>
+<li><tt>JJJ</tt> représente l'abréviation du nom du
+jour ou bien le numéro du jour dans la semaine&nbsp;:
+<ul>
+<li>0 = Dimanche</li>
+<li>1 = Lundi</li>
+<li>2 = Mardi</li>
+<li>...</li>
+<li>6 = Samedi</li>
+<li>7 = Dimanche (représenté deux fois pour les <a title="Dimanche" href="https://fr.wikipedia.org/wiki/Dimanche#Place_dans_la_semaine">deux
+types de semaine</a>)</li>
+</ul>
+</li>
+</ul>
+<p style="width: 979px;">Pour chaque valeur numérique (<tt>mm</tt>,
+<tt>hh</tt>, <tt>jj</tt>, <tt>MMM</tt>,
+<tt>JJJ</tt>) les notations possibles
+&nbsp;sont&nbsp;:</p>
+<ul>
+<li><i>*</i>&nbsp;: à chaque unité (0, 1, 2, 3,
+4...)</li>
+<li><i>5,8</i>&nbsp;: les unités 5 et 8</li>
+<li><i>2-5</i>&nbsp;: les unités de 2 à 5 (2,
+3, 4, 5)</li>
+<li><i>*/3</i>&nbsp;: toutes les 3 unités (0,
+3, 6, 9...)</li>
+<li><i>10-20/3</i>&nbsp;: toutes les 3 unités,
+entre la dixième et la vingtième (10, 13, 16, 19)</li>
+</ul>
+<br>
+<br>
+<br>
+<h1 style="color: rgb(102, 102, 102);" id="SarahPortage">Portage
+de plugin S.A.R.A.H</h1>
+Un plugin développé pour S.A.R.A.H peut très bien fonctionner sur
+Avatar. <br>
+Il suffit juste d'appliquer quelques changements:<br>
+<ol>
+<li>Créer un fichier <a href="index.html#Intent">Intent</a>
+et un fichier <a href="index.html#Action">Action</a>:</li>
+<ol>
+<li>On fera le fichier d'Intention en le copiant d'une
+intention existante. Une fois fait, c'est généralement terminer et il
+n'y a pas à y revenir puisque toutes les règles utilisent la même
+Intention. </li>
+<li>On fera le fichier d'Action en le copiant d'une Action
+existante et en gardant que ce qui est commun au plugin (le corps des
+fonctions, les variables globales, une partie de l'objet state,
+d'autres choses si besoin...).&nbsp;</li>
+<ol>
+<li>Passez dans <span style="font-style: italic;">state.action</span>
+les paramètres nécessaires au plugin qui les recevra comme paramètre <span style="font-style: italic;">data.action</span></li>
+<li>Vous disposez de nombreux exemples pour voir plusieurs
+cas de figures possibles.</li>
+</ol>
+</ol>
+<li>Déplacer les règles XML vers le fichier de propriétés du
+plugin (.prop) et les refaire avec <a href="index.html#wherekeyword">une
+syntaxe <span style="font-style: italic;">NLP</span></a></li>
+<ol>
+<li>Vous disposez de nombreux exemples dans les fichiers de
+propriétés des plugins existants.</li>
+<li>Vous disposez de l'action <a href="#actionEnd">End</a>
+pour vous aider à vérifier quels termes ou syntaxes doivent-être
+ajoutés dans les
+tableaux de règles.</li>
+</ol>
+<li>Vérifier et modifier les fonctions dans le(s) fichier(s)
+javascript du plugin pour qu'elles soient compatibles avec l'<a href="#API">API</a> Avatar.</li>
+<ol>
+<li>Cette application est faite pour le multiroom</li>
+<ol>
+<li>Dans pratiquement tous les cas, il faudra gérer et
+ajouter le 'client' (le <a href="#actionfunc"><span style="font-style: italic;">data.client</span></a>)
+dans chaque appel de fonction de l'API qui a le même nom que la
+fonction utilisée pour S.A.R.A.H.</li>
+</ol>
+<li>Le reste des fonctions étant du nodejs, il n'y a aucune
+modification à apporter.</li>
+</ol>
+</ol>
+<br>
+<br>
+<br>
+<h1 style="color: rgb(102, 102, 102);" id="API">API
+Javascript</h1>
+<h2 style="color: rgb(51, 204, 255);" id="APIServeurFuncs">Fonctions
+Avatar Serveur</h2>
+<h3 style="color: rgb(204, 51, 204);" id="APIConfig">Config
+&nbsp;<small style="font-weight: normal; font-style: italic;">Config.&lt;Key&gt;</small></h3>
+Objet global<span style="font-weight: bold;"> </span>du
+fichier de configuration Avatar.prop<br>
+<br>
+<pre>Config.default.client<br>=&gt; 'Salon'<br>Config.http.ip<br>=&gt; "127.0.0.1"</pre>
+<h3 style="color: rgb(204, 51, 204);" id="APIConfigModules">Config.modules
+&nbsp;<small style="font-weight: normal; font-style: italic;">Config.modules.&lt;Plugin&gt;.&lt;key&gt;</small></h3>
+Objet global de fichier de propriétés des plugins<br>
+<br>
+<pre>Config.modules.meteo.rules<br>=&gt; ["weather", "umbrella", "rain", "forecast"]<br>Config.modules.SonosPlayer.speech.ttsExport<br>=&gt; true</pre>
+<h3 style="color: rgb(204, 51, 204);" id="APICurrentRoom">Avatar.currentRoom
+&nbsp;<span style="font-style: italic; font-weight: normal;">Avatar.currentRoom</span></h3>
+Retourne le client courant.<br>
+<br>
+<pre>var currentRoom = Avatar.currentRoom;</pre>
+Le
+serveur sait toujours quel client envoit la règle à interprêter mais
+quelques fois, il est nécessaire de récupérer le client courant.<br>
+<span style="font-weight: bold;">Quelques exemples:</span>
+<ol>
+<li>Un
+scénario se lance et Avatar doit vous demander <span style="font-weight: bold; text-decoration: underline;">de
+lui-même</span> s'il faut allumer la
+lumière&nbsp;parce qu'il fait trop sombre. la question est
+:&nbsp;</li>
+</ol>
+<ul>
+<ul>
+<ul>
+<li>Dans
+quelle pièce Avatar va vous le dire et attendre une réponse ? Dans
+toutes les pièces (A la façon papa bidouille... ?) où seulement dans la
+pièce où il y a du monde ?</li>
+</ul>
+</ul>
+</ul>
+<div style="margin-left: 40px;">&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; =&gt;
+Utilisez alors cette
+variable pour que la demande soit faite dans la pièce courante..<br>
+</div>
+<ul>
+<ul>
+<ul>
+<li>Comment cette variable est mise à jour ?</li>
+</ul>
+</ul>
+</ul>
+<div style="margin-left: 40px;">&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; =&gt; Il existe plusieurs actions
+qui mettent à jour cette variable:<br>
+</div>
+<ol>
+<ol>
+<ol>
+<li>A l'initialisation d'Avatar Serveur par&nbsp;la
+valeur de la propriété <a href="index.html#ClientCom"><span style="font-style: italic;">Config.default.client</span></a>.</li>
+<li>Avec des capteurs de mouvements qui vont déclencher une
+règle dans votre box domotique pour mettre à jour <span style="font-style: italic;">Avatar.currentRoom </span>en
+fonction de la pièce courante.</li>
+</ol>
+</ol>
+</ol>
+<ol>
+<ol>
+<ol start="3">
+</ol>
+</ol>
+</ol>
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+<ul>
+<li>&nbsp;De loin la plus intéressante et qui
+donne de l'intélligence à notre Avatar.</li>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+<ol>
+<ol>
+<ul>
+<ul>
+<ul>
+<li>Exemple
+d'une règle à envoyer à AVATAR avec un détecteur dans le
+Salon:&nbsp;
+<span style="font-style: italic;">http://IP:Port/Avatar/generic?command=currentRoom&amp;client=Salon</span>&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; </li>
+</ul>
+</ul>
+</ul>
+</ol>
+</ol>
+<ol start="2">
+<li>Supposons
+2 pièces adjacentes qui ont chacune 1 client. Elles sont très proches
+ce qui fait que lorsque une écoute est déclenchée, suivant le micro qui
+capte le mieux, c'est l'autre pièce qui répond... très ennuyeux, parce
+que très souvent on se trouve evidement dans l'autre pièce.</li>
+</ol>
+<ul>
+<ul>
+<ul>
+<li>Il
+est possible de faire en sorte que chaque client&nbsp; vérifie si
+la
+pièce courante est celle qui a captée et qu'elle réponde ou pas au
+déclenchement par la variable <span style="font-style: italic;">Avatar.currentRoom</span>
+en définissant la propriété <a href="#Ecoute"><span style="font-style: italic;">Config.listen.current</span></a>
+sur le client à <span style="font-weight: bold;">true</span></li>
+</ul>
+</ul>
+</ul>
+<h3 style="color: rgb(204, 51, 204);" id="APIrun">run
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.run(name,
+options, [callback])</small></h3>
+Exécute le plugin <span style="font-weight: bold;">name</span>
+avec les paramètres de l'objet <span style="font-weight: bold;">options</span>.<br>
+Si la fonction <span style="font-weight: bold;">callback</span>
+existe, alors elle est exécutée après l'exécution du plugin.<br>
+<br>
+<span style="font-style: italic;">options.client</span>
+est le nom du client pour lequel le plugin est exécuté. Si&nbsp;<span style="font-style: italic;">options.client</span>
+est&nbsp;omis (<span style="font-style: italic;">null</span>),
+le client par défaut <a href="index.html#ClientCom"><span style="font-style: italic;">Config.default.client</span></a>
+est utilisé.<br>
+Le contenu de <span style="font-style: italic;">options</span>
+<span style="font-weight: bold; text-decoration: underline;">à
+l'exception de </span><span style="font-style: italic; font-weight: bold; text-decoration: underline;">options.client</span>
+est automatiquement ajouté dans un objet <span style="font-style: italic;">data.action</span>
+accessible dans les plugins. <br>
+Par exemple, <span style="font-style: italic;">options.command</span>
+devient <span style="font-style: italic;">data.action.command</span>
+et <span style="font-style: italic;">options.value</span>
+devient <span style="font-style: italic;">data.action.value</span>
+dans le plugin&nbsp;exécuté par <span style="font-weight: bold;">run<span style="font-style: italic;"> </span></span><span style="font-style: italic;">(options.clien</span>t
+devient <span style="font-style: italic;">data.client</span>).<br>
+<br>
+<img style="width: 1001px; height: 57px;" alt="run()" title="run()" src="images/js/run.png"><br>
+<br>
+<span style="font-weight: bold;">Notes</span>:<br>
+<ul>
+<li>Cette fonction est appelée par tous les appels de plugin
+par requète HTTP (browser, box domotique, etc...)</li>
+<li>Cette fonction est appelée par toutes les règles dictées
+sur les clients.</li>
+<li>Identique à la fonction <span style="font-weight: bold;">call()</span>,
+excepté que cette fonction <span style="font-weight: bold;">ajoute</span>
+l'action exécutée dans le tableau d'historique des actions pouvant être
+exécutées par <span style="font-weight: bold;">last()</span><br>
+</li>
+</ul>
+<h3 style="color: rgb(204, 51, 204);" id="APIcall">call
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.call(name,
+options, [callback])</small></h3>
+Exécute le plugin <span style="font-weight: bold;">name</span>
+avec les paramètres de l'objet <span style="font-weight: bold;">options</span>.<br>
+Si la fonction <span style="font-weight: bold;">callback</span>
+existe, alors elle est exécutée après l'exécution du plugin.<br>
+<br>
+<span style="font-style: italic;">options.client</span>
+est le nom du client pour lequel le plugin est exécuté. Si&nbsp;<span style="font-style: italic;">options.client</span>
+est&nbsp;omis (<span style="font-style: italic;">null</span>),
+le client par défaut <a href="index.html#ClientCom"><span style="font-style: italic;">Config.default.client</span></a>
+est utilisé.<br>
+Le contenu de <span style="font-style: italic;">options</span>
+<span style="font-weight: bold; text-decoration: underline;">à
+l'exception de </span><span style="font-style: italic; font-weight: bold; text-decoration: underline;">options.client</span>
+est automatiquement ajouté dans un objet <span style="font-style: italic;">data.action</span>
+accessible dans les plugins. <br>
+Par exemple, <span style="font-style: italic;">options.command</span>
+devient <span style="font-style: italic;">data.action.command</span>
+et <span style="font-style: italic;">options.value</span>
+devient <span style="font-style: italic;">data.action.value</span>
+dans le plugin&nbsp;exécuté par <span style="font-weight: bold;">run<span style="font-style: italic;"> </span></span><span style="font-style: italic;">(options.clien</span>t
+devient <span style="font-style: italic;">data.client</span>).<br>
+<br>
+<img style="width: 992px; height: 56px;" alt="call()" title="call()" src="images/js/call.png"><br>
+<br>
+<span style="font-weight: bold;">Notes</span>:<br>
+<ul>
+<li>Identique à la fonction <span style="font-weight: bold;">run()</span>
+excepté que cette fonction <span style="font-weight: bold;">n'ajoute
+pas</span>
+l'action exécutée dans le tableau d'historique des actions pouvant être
+exécutées par <span style="font-weight: bold;">last()</span></li>
+</ul>
+<h3 style="color: rgb(204, 51, 204);" id="APIlast">last
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.last(client)</small></h3>
+Retourne un tableau d'objet de la dernière action exécutée pour le <span style="font-style: italic;">client</span>
+<pre>var lastAction = Avatar.last('Salon');<br>=&gt; [{ cmds: [{client : 'Salon', cmd : 'eeDomus'}],<br> options : { client : 'Salon', action : options.action} <br> }]<br>lastAction[0].cmds[0].cmd;<br>=&gt; 'eeDomus'<br>var action = lastAction[0].options.action;<br>=&gt; { command: 'switchlight', value: 'On' }<br></pre>
+<h3 style="color: rgb(204, 51, 204);" id="APIaction">action
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.ia.action(sentence,
+client, [callback])</small></h3>
+Cette fonction déclenche l'exécution du traitement de la <span style="font-weight: bold;">sentence</span> par NLP
+(voir le chapitre <a href="#History">Un peu d'histoire
+sur le Traitement du Langage</a>, point 5 du traitement), puis
+l'exécute sur le <span style="font-weight: bold;">client</span>.<br>
+Si la fonction <span style="font-weight: bold;">callback</span>
+existe, alors elle est exécutée après l'exécution de l'action.<br>
+<br>
+<pre>Avatar.ia.action('donne moi la météo', 'Salon')<br>=&gt; exécute le plugin météo<br>Avatar.ia.action('donne moi la météo', 'Salon', function () { /* Do next stuff */ });</pre>
+<br>
+<h3 style="color: rgb(204, 51, 204);" id="APIclientFromRule">clientFromRule&nbsp;&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.ia.clientFromRule(sentence, [clientSpeech])</small></h3>
+Retourne le nom d'un client si il est présent dans&nbsp;<span style="font-weight: bold;">sentence</span>.<br>
+Si aucun client n'est présent, 'current' est retourné.<br><span style="font-style: italic;">clientSpeech: </span>Optionnel<span style="font-style: italic;">,&nbsp;</span>utilisé
+lorsque vous choisissez la possibilité d'inclure dans la règle le nom
+d'une pièce. Le fichier action généré par la commande "Créer un plugin"
+ajoute automatiquement un appel à cette fonction et un object <span style="font-style: italic;">state.action.room</span> pouvant être utilisé dans le fichier js du plugin. le client qui a généré la règle est passé dans l'objet <span style="font-style: italic;">room</span>.<br>
+<br>
+<pre>Avatar.ia.clientFromRule('allume la lumière');<br>=&gt; 'current'<br>Avatar.ia.clientFromRule('allume la lumière de la cuisine');<br>=&gt; 'cuisine'<br>Avatar.ia.clientFromRule('dans la cuisine, allume la lumière');<br>=&gt; 'cuisine'</pre>
+<br>
+<h3 style="color: rgb(204, 51, 204);" id="APItrigger">trigger
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.trigger(name,
+options)</small></h3>
+Déclenche le module d'écoute <span style="font-weight: bold;">name
+</span>déclaré dans un plugin avec les paramètres <span style="font-weight: bold;">options</span>.<br>
+<br>
+<pre>Avatar.trigger('eeDomus', {key: 'SwitchLight', client: 'Chambre', state: "0" });</pre>
+<h3 style="color: rgb(204, 51, 204);" id="APIlisten">listen
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.listen(name,
+options)</small></h3>
+Module d'écoute <span style="font-weight: bold;">name</span>
+déclaré dans un plugin, recoit les <span style="font-weight: bold;">options</span>
+définis dans le déclencheur <span style="font-weight: bold;">trigger</span><br>
+Un module d'écoute doit être déclaré une seule fois, il sera donc
+déclaré dans le fonction <a href="#initfunc">export.init()</a>
+des plugins.<br>
+<br>
+<pre>exports.init = function(){<br>	<br>	Avatar.listen('eeDomus', function(data){<br>	if (data.client == 'Chambre' &amp;&amp; data.key == 'SwitchLight') {<br>	setEECommand(Config.modules.eeDomus.clients.chambre.Light, data.state); <br>	}<br>	});<br><br>}</pre>
+<h3 style="color: rgb(204, 51, 204);" id="APIcopyfile">copyfile
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.copyfile(path,
+client, [callback])</small></h3>
+Copie un fichier sur le <span style="font-weight: bold;">client</span>
+dans le répertoire <tt>&lt;<span style="font-style: italic;">Dossier d'install du client</span>&gt;/app/transfert</tt>
+<br>
+<span style="font-weight: bold;">path</span> est le
+chemin en relatif du fichier à partir du répertoire d'installation du
+serveur.<br>
+Si la fonction <span style="font-weight: bold;">callback</span>
+existe, alors elle est exécutée après la copie.<br>
+<br>
+<pre>Avatar.copyfile('plugins/translate/tts/translated.wav', 'Salon');<br>=&gt; copie le fichier 'translated.wav' sur le client Salon<br>Avatar.copyfile('plugins/translate/tts/translated.wav', 'Salon', function() { <br> Avatar.play('%TRANSFERT%/translated.wav', 'salon', function() { <br> Avatar.Speech.end(client);<br> });<br>});<br>=&gt; copie le fichier 'translated.wav' sur le client Salon, le joue puis remet le son des périphériques (voir la fonction <a href="#APIplay">play()</a>)</pre>
+<h3 style="color: rgb(204, 51, 204);" id="APIremote">remote
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.remote(objet,
+client, [callback])</small></h3>
+Exécute le "socket event" défini dans <span style="font-weight: bold;">objet</span> sur le <span style="font-weight: bold;">client</span><br>
+Si la fonction <span style="font-weight: bold;">callback</span>
+existe, alors elle est exécutée après.<br>
+<br>
+L'<span style="font-weight: bold;">objet</span> doit
+être un evénemment accepté par le client<br>
+<br>
+On préférera utiliser les fonctions API réservées au client plutôt que
+remote (voir le paragraphe <a href="#APIClientFuncs">Fonctions
+Avatar Client</a>)<br>
+<br>
+<pre>var qs = { <br> 'cmd' : 'mute',<br> 'sync' : true<br>};<br>=&gt; event 'mute' qui coupe l'écoute du client<br>Avatar.remote(qs, 'Salon', function() {<br>	Avatar.ia.action('donne moi la météo', client);<br>});<br>=&gt; coupe l'écoute puis exécute le plugin météo</pre>
+<h3 style="color: rgb(204, 51, 204);" id="APIspeak">speak
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.speak(tts,
+client, [callback])</small></h3>
+Envoit un <span style="font-weight: bold;">tts</span>
+sur le speaker du client ou si elle a été surclassée, sur le
+système audio déclaré (Par exemple un système Sonos).<br>
+Cette fonction est toujours synchrone, si la fonction <span style="font-weight: bold;">callback</span> existe,
+alors elle est exécutée seulement après la fin de la vocalisation du
+tts sur le client (ou sur le Sonos Player).<br>
+<br>
+<span style="font-weight: bold;">tts</span> peut
+avoir plusieurs phrases séparées par des pipes ('|'), une seule sera
+alors
+aléatoirement vocalisée.<br>
+<br>
+<br>
+<span style="font-weight: bold;">Notes:</span> <br>
+<ul>
+<li>Dans tous les cas (speaker du client ou géré par le
+serveur), lorsque l'écoute est activée sur un client (par le mot-clé),
+Avatar coupe l'écoute du client afin de ne pas avoir de faux
+positifs qui
+pourraient se déclencher<span style="font-weight: bold;"></span>.&nbsp;</li>
+<li>Il est possible aussi de couper le son des périphériques au
+moment où cette fonction est appelée afin d'avoir un dialogue clair
+(voir plus haut la fonction <span style="font-style: italic;">mute()</span>).</li>
+<li>Lorsque le dialogue est terminé (après un ou plusieurs
+speak, suivant ce que vous désirez faire), vous devez <span style="text-decoration: underline; font-weight: bold;">toujours</span>
+réactiver
+l'écoute sur le client et si besoin, remettre le son sur les
+périphériques par la fonction <a href="#APIend"><span style="font-style: italic;">Avatar.Speech.end()</span></a>
+<span style="font-weight: bold; text-decoration: underline;">sauf</span>
+si le speak a été exécuté sans passer par une règle et le mot-clé
+déclencheur, par exemple si c'est&nbsp;une phrase automatiquement
+générée dans un plugin (dans un cron par exemple, pour vous rappeler
+d'exécuter quelque chose à une heure précise).<br>
+</li>
+</ul>
+<br>
+<pre>Avatar.speak('Bonjour, je m'appelle Avatar', 'Salon')<br>=&gt; vocalise la phrase sur le speaker du 'Salon' et ne réactive pas l'écoute<br><br>Avatar.speak('Bonjour, je m'appelle Avatar', 'Salon', function () { <br>	Avatar.Speech.end('Salon');<br>})<br>=&gt; vocalise la phrase sur le speaker du 'Salon' et réactive l'écoute (voir ci-dessous end)<br><br>Avatar.speak('Bonjour, je m'appelle Avatar|Hello je suis Avatar|Avatar pour vous servir', 'Salon');<br>=&gt; vocalise une des phrases aléatoirement sur le speaker du 'Salon' <br><br>Avatar.speak('Bonjour, je m'appelle Avatar', 'Salon', function () { <br>	Avatar.speak('Je suis à ton service', 'Salon', function () { <br>	Avatar.Speech.end('Salon');<br>	})<br>})<br>=&gt; vocalise 2 phrases sur le speaker du 'Salon' et réactive l'écoute (voir ci-dessous end)</pre>
+<h3 style="color: rgb(204, 51, 204);" id="APIend">end
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.Speech.end(client,
+[full], [callback])&nbsp;</small></h3>
+Réactive l'écoute sur le <span style="font-weight: bold;">client</span>.
+<br>
+<pre>Avatar.Speech.end('Salon')<br>=&gt; Si <span style="font-weight: bold;">full</span><span style="font-weight: bold;"> =</span> <span style="font-weight: bold;">null</span> ou <span style="font-weight: bold;">true</span>, <span style="font-weight: bold;"></span><span style="font-weight: bold;">remet</span> le son des périphériques<span style="font-weight: bold;"> </span>et<span style="font-weight: bold;"> réactive</span> l'écoute du client 'Salon' <br>Avatar.Speech.end('Salon', false)<br>=&gt; Si <span style="font-weight: bold;">full</span> = <span style="font-weight: bold;">false</span>, <span style="font-weight: bold;">remet </span>le son des périphériques et <span style="font-weight: bold;">ne réactive pas</span> l'écoute du client 'Salon'<br>Avatar.Speech.end('Salon', 'end')<br>=&gt; Utilisable uniquement en <a href="#Ecoute">mode loop</a>, <br>=&gt; si <span style="font-weight: bold;">full</span> = <span style="font-weight: bold;">'end'</span> alors le mode loop est intérrompu, <span style="font-weight: bold;">remet</span> le son des périphériques<span style="font-weight: bold;"> </span>et<span style="font-weight: bold;"> réactive</span> l'écoute du client 'Salon'</pre>
+Si la fonction <span style="font-weight: bold;">callback</span>
+existe, alors elle est exécutée après la réactivation de l'écoute et/ou
+la remise du son des périphériques.<br>
+<br>
+<h3 style="color: rgb(204, 51, 204);" id="APIaskme">askme
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.askme(tts,
+client, grammaire, timeout,&nbsp;callback)&nbsp;</small></h3>
+Envoit un <span style="font-weight: bold;">tts</span>
+sur le speaker du <span style="font-weight: bold;">client</span>
+ou si l'audio est géré par le serveur, sur le système audio déclaré
+(Par exemple un système Sonos), attend une réponse définie dans l'objet
+<span style="font-weight: bold;">grammaire</span>
+puis retourne le résultat dans le <span style="font-weight: bold;">callback</span>
+avec la fonction du <span style="font-weight: bold;">timeout</span>
+associé.<br>
+Cette fonction est toujours synchrone,&nbsp;la fonction <span style="font-weight: bold;">callback</span> est
+exécutée seulement après la réponse.<br>
+<br>
+Si <span style="font-weight: bold;">timeout</span>
+est &lt; à 15000 ms alors timeout = 15000 ms<br>
+Si <span style="font-weight: bold;">timeout</span>
+est &gt; à 15000 ms alors timeout = valeur définie<br>
+<br>
+Pour améliorer le résultat
+de la phrase prononcée et traitée par l'API (Google ou
+Oxford)&nbsp;vers laquelle le
+fichier audio a été envoyé, une recherche de la grammaire la plus
+proche est effectuée par une <a href="https://fr.wikipedia.org/wiki/Distance_de_Levenshtein">distance
+de levenshtein</a>. <br>
+<br>
+<span style="font-weight: bold;">Notes:</span> <br>
+<ul>
+<li>Dans tous les cas (speaker du client ou géré par le
+serveur), la fonction <span style="font-weight: bold;">askme</span>
+coupe
+l'écoute du client afin de ne pas avoir de faux positifs qui pourraient
+se déclencher&nbsp;lors de la vocalisation du&nbsp;<span style="font-weight: bold;">tts</span>.&nbsp;</li>
+<li>Il est possible aussi de couper le son des périphériques au
+moment où cette fonction est appelée afin d'avoir un dialogue clair.</li>
+<li>Dans
+tous les cas, lorsque le résultat est retourné dans le <span style="font-weight: bold;">callback</span>, vous devez
+au minimum, stopper le <span style="font-weight: bold;">timeout</span>
+du askme et si besoin, réactiver
+l'écoute sur le client et remettre le son sur les
+périphériques par la fonction&nbsp;<span style="font-style: italic;">end</span>.</li>
+</ul>
+<img style="width: 967px; height: 564px;" alt="askme" title="askme" src="images/js/askme.png"><br>
+<br>
+<br>
+<span style="font-weight: bold;">askme</span>
+accepte une règle de grammaire générique ('*') qui retourne le texte
+dicté sous la forme <span style="font-weight: bold;">"tag:réponse"</span><br>
+Cette règle générique peut être utilisée en même temps que des règles
+de syntaxes strictes.<br>
+<br>
+<img style="width: 597px; height: 615px;" alt="askme generique" title="askme generique" src="images/js/askme%20generique.png"><br>
+<br>
+<h3 style="color: rgb(204, 51, 204);" id="APIisMobile">isMobile
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.isMobile(client)</small></h3>
+Retourne true si le client est un client mobile (Android), false sinon.<br>
+<br>
+<pre>"mobile" : ["Android"],<br><br>Avatar.isMobile ('Android');<br>=&gt; true<br><br>Avatar.isMobile ('Salon');<br>=&gt; false</pre>
+<h3 style="color: rgb(204, 51, 204);" id="APImapClient">mapClient
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.mapClient(client)</small></h3>
+Retourne le client réel de <span style="font-weight: bold;">client</span>
+si il est mappé (défini dans la
+propriété <a href="#ClientCom"><span style="font-style: italic;">Config.default.mapping</span></a><a href="#ClientCom"><span style="font-style: italic;"></span></a>)<br>
+Si <span style="font-weight: bold;">client</span>
+est un client virtuel,&nbsp; <a style="font-style: italic;" href="index.html#ClientCom">Config.default.virtual_name</a>
+est retourné.<br>
+<br>
+<pre>"mapping" : ["Escalier,Cuisine"],<br>"virtual" : [],<br><br>// client mappé<br>Avatar.mapClient ('Escalier');<br>=&gt; "Cuisine"<br>Avatar.mapClient ('Cuisine');<br>=&gt; "Cuisine"<br>Avatar.mapClient ('Salon');<br>=&gt; "Salon"<br><br><br><br>// Client virtuel<br>"mapping" : ["Escalier,Salle de bains"],<br>"virtual" : ["Salle de bains","Couloir"],<br><br>Avatar.mapClient ('Escalier');<br>=&gt; "Nomade"<br>Avatar.mapClient ('Salle de bains');<br>=&gt; "Nomade"<br>Avatar.mapClient ('Couloir');<br>=&gt; "Nomade"</pre>
+<h3 id="APIgetClients"><span style="color: rgb(204, 51, 204);">getClients &nbsp;</span><small style="font-weight: normal; font-style: italic; color: rgb(204, 51, 204);">Avatar.Socket.getClients()</small></h3>
+Retourne un tableau d'objets de tous les clients connectés ou <span style="font-style: italic;">null</span><br>
+<br>
+<pre>Avatar.Socket.getClients()<br>=&gt; [{id: 'Salon', server_speak : false, client_ip : '192.168.XX.XX', loopback: '8888', Obj: clientSocket}, <br> {id: 'Chambre', server_speak : true, client_ip : '192.168.XX.XX', loopback: '8888', Obj: clientSocket}<br>&nbsp; ]<br><br>id: le nom du client<br>server_speak: <span style="font-weight: bold;"> false</span> =&gt; le speaker du client est utilisé, <span style="font-weight: bold;"> true</span> =&gt; le speaker du client n'est pas utilisé (l'audio est géré par le serveur)<br>client_ip: l'adresse IP du client micro #C du client<br>loopback: le port utilisé par le client micro #C du client<br>Obj: l'objet socket du client créé à sa connection</pre>
+<h3 style="color: rgb(204, 51, 204);" id="APIgetClientSocket">getClientSocket&nbsp;&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.Socket.getClientSocket(client)</small></h3>
+Retourne l'objet socket du client ou <span style="font-style: italic;">null</span><br>
+<br>
+<pre>Avatar.Socket.getClientSocket('Salon')<br>=&gt; Retourne l'objet socket du client<br>.emit('stop_record')<br>=&gt; exemple: Coupe l'écoute du client 'Salon'</pre>
+Cette fonction est compatible avec un client virtuel:<br>
+<pre>"mapping" : ["Escalier,Cuisine"],<br>Avatar.Socket.getClientSocket('Escalier')<br>=&gt; Retourne l'objet socket du client réel 'Cuisine'<br>.emit('stop_record')<br>=&gt; exemple: Coupe l'écoute du client 'Cuisine'</pre>
+Ci-dessous les evènements pouvant être appelés avec l'objet socket<br>
+<table style="text-align: left; width: 890px; height: 154px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="width: 150px; text-align: center; font-weight: bold; background-color: rgb(255, 204, 153);">Event</td>
+<td style="width: 259px; text-align: center; font-weight: bold; background-color: rgb(255, 204, 153);">Function</td>
+<td style="width: 429px; text-align: center; font-weight: bold; background-color: rgb(255, 204, 153);">Définition</td>
+</tr>
+<tr>
+<td style="width: 150px;">stop_record</td>
+<td style="width: 259px;">.emit('stop_record')</td>
+<td style="width: 429px;">Coupe l'écoute du client</td>
+</tr>
+<tr>
+<td style="width: 150px;">start_listen</td>
+<td style="width: 259px;">.emit('start_listen')</td>
+<td style="width: 429px;">Démarre l'écoute du client.<br>
+Identique à l'activation avec le <a href="#HotWordKey">mot-clé</a>
+de déclenchement de l'écoute</td>
+</tr>
+<tr>
+<td style="width: 150px;">listen_again</td>
+<td style="width: 259px;">.emit('listen_again')</td>
+<td style="width: 429px;">Réactive l'écoute.</td>
+</tr>
+<tr>
+<td style="width: 150px;">reset_volume</td>
+<td style="width: 259px;">.emit('reset_volume',
+[value])</td>
+<td style="width: 429px;">Reset le volume du
+microphone.<br>
+Si&nbsp;<span style="font-weight: bold;">value</span>
+est définie, la valeur est utlisée sinon la valeur de <a href="#MicroSpeaker">Config.microphone.level_micro</a>
+est utilisée.<br>
+<br>
+<pre>.emit('reset_volume')<br>=&gt; Reset avec la valeur par défaut<br>.emit('reset_volume', 40000)<br>=&gt; Reset avec la valeur 40000 (~80%)</pre>
+Note: <a href="#MicroSpeaker">Config.microphone.set_micro</a>
+doit être à <span style="font-weight: bold;">true</span>
+sur le client</td>
+</tr>
+<tr>
+<td style="width: 150px;">speaker_volume</td>
+<td style="width: 259px;">.emit('speaker_volume',
+[value])</td>
+<td style="width: 429px;">Reset le volume de
+l'enceinte du PC client.<br>
+Si&nbsp;<span style="font-weight: bold;">value</span>
+est définie, la valeur est utlisée sinon la valeur de <a href="#MicroSpeaker">Config.speaker.default</a> est
+utilisée.<br>
+<br>
+<pre>.emit('speaker_volume')<br>=&gt; Reset avec la valeur par défaut<br>.emit('speaker_volume', 56000)<br>=&gt; Reset avec la valeur 56000 (~80%)</pre>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<br>
+<h3 style="color: rgb(204, 51, 204);" id="APIisServerSpeak">isServerSpeak
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.Socket.isServerSpeak(client)</small></h3>
+Retourne <span style="font-weight: bold;">true</span>
+si le speaker n'est pas géré par le client (Utilisation d'un Player
+Sonos par exemple)<br>
+<br>
+<pre>"mapping" : ["Escalier,Cuisine"],<br><br>Avatar.Socket.isServerSpeak('Salon')<br>=&gt; false<br>Avatar.Socket.isServerSpeak('Cuisine')<br>=&gt; true</pre>
+Cette fonction est compatible avec un client virtuel:<br>
+<pre>"mapping" : ["Escalier,Cuisine"],<br><br>Avatar.Socket.isServerSpeak('Escalier')<br>=&gt; true</pre>
+<h3 style="color: rgb(204, 51, 204);" id="APIexists">exists
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.exists(plugin)</small></h3>
+Retourne <span style="font-weight: bold;">true</span>
+si <span style="font-weight: bold;">plugin</span>
+existe<br>
+<br>
+<pre>Avatar.exists('meteo')<br>=&gt; true<br>Avatar.exists('blabla')<br>=&gt; false</pre>
+<br>
+<h2 style="color: rgb(51, 204, 255);" id="APIClientFuncs">Fonctions
+Avatar Client</h2>
+<br>
+Fonctions de gestions et d'actions pour les clients Avatar
+<h3 style="color: rgb(204, 51, 204);" id="APIshutup">shutup
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.shutup(client)</small></h3>
+Le tts en cours de vocalisation du <span style="font-weight: bold;">client</span>
+est stoppé. <br>
+<br>
+<pre>Avatar.shutup('Salon');<br>=&gt; Stoppe le tts du client 'Salon'<br></pre>
+<h3 style="color: rgb(204, 51, 204);" id="APIplay">play
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.play(path,
+client,&nbsp; [callback])</small></h3>
+Lit un fichier audio (mp3 ou wav) sur le <span style="font-weight: bold;">client</span>.<br>
+<span style="font-weight: bold;">path</span> est:<br>
+<ul>
+<li>Le
+chemin en relatif du fichier à partir du répertoire d'installation du
+client.</li>
+<li>Si '%CD%' est ajouté au chemin alors il est remplacé par
+le <span style="font-style: italic;">répertoire absolu de
+l'installation du client/app</span></li>
+<li>Si '%TRANSFERT%' est ajouté au chemin alors il est
+remplacé par
+le <span style="font-style: italic;">répertoire absolu de
+l'installation du client/app/transfert</span></li>
+<li><span style="font-style: italic;">Si
+'SERVERURL'
+</span>est ajouté au chemin alors il est remplacé par <span style="font-style: italic;">IP:PORT</span> du serveur
+où se trouve le fichier à jouer. Le répertoire du serveur doit être
+reconnu comme un répertoire static et accessible par une requête URL.
+Voir l'exemple plus bas.</li>
+<li>Si '%URL%' est ajouté au chemin alors la suite doit être
+une URL d'un site web où se trouve le fichier à jouer</li>
+</ul>
+Si la fonction <span style="font-weight: bold;">callback</span>
+existe, alors elle est exécutée après la lecture du fichier audio.<br>
+<br>
+<pre>Avatar.play('../../../../musique/mp3/trompette.mp3', 'Salon');<br>=&gt; Joue le mp3 depuis le répertoire musique au même niveau que le répertoire d'installation du client 'Salon'<br><br><br>Avatar.play('c:/musique/mp3/trompette.mp3', 'Salon');<br>=&gt; Joue le mp3 depuis le répertoire en absolu du client 'Salon'<br><br>	<br>Avatar.play('%CD%/mp3/trompette.mp3', 'Salon');<br>=&gt; Joue le mp3 depuis le répertoire <span style="font-style: italic;">&lt;CLIENT&gt;/resources/app/core/mp3</span> du client 'Salon'<br><br><br>let staticPath = path.resolve(join(__dirname, "audio", "Salon"));<br>Avatar.Documentation.setStaticPath(staticPath, () =&gt; {<br>	Avatar.play('SERVERURL/audio.mp3', client, () =&gt; {<br>	callback(true);<br>	})<br>});<br>=&gt; Joue le mp3 depuis le répertoire "audio/Salon" du plugin sur le client "Salon". On déclare au préalable le répertoire "<span style="font-style: italic;">audio/Salon</span>" comme static<br><br><br>Avatar.play('%URL%https://scdn.nrjaudio.fm/fr/30401/mp3_128.mp3?origine=fluxradios&amp;cdn_path=adswizz_lbs9', 'Salon');<br>=&gt; Joue l'adresse web sur le client 'Salon'<br><br><br>Avatar.speak("Je met rire et chansons", 'Salon', function() {<br>	Avatar.Speech.end('Salon', true, () =&gt; {<br>	Avatar.play('%URL%https://scdn.nrjaudio.fm/fr/30401/mp3_128.mp3?origine=fluxradios&amp;cdn_path=adswizz_lbs9', 'Salon');<br>	});<br>});<br>=&gt; Message de confirmation<br>=&gt; Restitue l'écoute sur le client<br>=&gt; Joue "Rire et chansons" sur le client 'Salon'</pre>
+<h3 style="color: rgb(204, 51, 204);" id="APIstop">stop
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.stop(null,
+client)</small></h3>
+Stop la lecture du fichier audio sur le <span style="font-weight: bold;">client</span>.<br>
+<br>
+<pre>Avatar.stop(null,'Salon');<br>=&gt; stoppe la lecture du mp3 <br><br><br>Avatar.speak("Je stoppe la radio", 'Salon', function() {<br>	Avatar.Speech.end(d'Salon', true, () =&gt; {<br>	Avatar.stop(null, 'Salon');<br>	});<br>});<br>=&gt; Message de confirmation<br>=&gt; Restitue l'écoute sur le client<br>=&gt; stoppe la lecture du mp3 <br></pre>
+<h3 style="color: rgb(204, 51, 204);" id="APIrunApp">runApp
+&nbsp;<small style="font-weight: normal; font-style: italic;">Avatar.runApp(path, params, client, [callback])</small></h3>
+Lance une application sur le <span style="font-weight: bold;">client</span>.<br>
+<span style="font-weight: bold;">path</span> est:<br>
+<ul>
+<li>Le chemin <span style="font-weight: bold;">absolu</span>
+de l'application.</li>
+<li>Si '%CD%' est ajouté au chemin, alors il est remplacé par
+le <span style="font-style: italic;">répertoire absolu de
+l'installation du client/app</span></li>
+</ul>
+<span style="font-weight: bold;">params</span>
+doit toujours être <span style="font-style: italic;">null</span><br>
+Si la fonction <span style="font-weight: bold;">callback</span>
+existe, alors elle est exécutée après l'exécution de l'application.<br>
+<br>
+<pre>Avatar.runApp('%CD%/lib/nircmd/nircmd mutesysvolume 1', null, 'Salon');<br>=&gt; Lance l'application <tt>&lt;<span style="font-style: italic;">Dossier d'install du client</span>&gt;/app/core/lib/nircmd/nircmd</tt> avec le paramètre 'mutesysvolume' qui coupe le son du client 'Salon'<br><br>Avatar.runApp('%CD%/lib/nircmd/nircmd mutesysvolume 1', null, 'Salon', function() {<br> // Do stuff...<br>});<br>=&gt; Lance l'application <tt>&lt;<span style="font-style: italic;">Dossier d'install du client</span>&gt;/app/core/lib/nircmd/nircmd</tt> avec le paramètre 'mutesysvolume' qui coupe le son du client 'Salon'<br>et exécute ensuite le callback<br><br>Avatar.runApp("C:\\program files (x86)\\Winamp \"C:\\musique\\mysong.mp3\"", null, 'Salon');<br>=&gt; Lance Winamp avec comme paramètre le fichier mp3 mysong</pre>
+<br>
+<h1 style="color: rgb(102, 102, 102);" id="APIAdvance">Fonctionnalités
+avancées</h1>
+<h2 style="color: rgb(51, 204, 255);" id="APIAdvanceMore">Fonctions
+supplémentaires</h2>
+<br>
+Certaines fonctions sont accessibles mais n'ont pas de règles propres
+dans cette version d'Avatar.<br>
+Elles sont disponibles:<br>
+<ul>
+<li>Par requètes HTTP par exemple depuis une box domotique, une
+tablette, une montre connectée, etc...&nbsp;</li>
+<li>Par les fonctions API javascript <a href="index.html#APIrun">run()</a> ou <a href="index.html#APIcall">call()</a></li>
+</ul>
+&nbsp;<br>
+<table style="text-align: left; width: 996px; height: 184px;" border="1" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="width: 118px; text-align: center; font-weight: bold; background-color: rgb(255, 204, 153);">Fonction</td>
+<td style="width: 569px; text-align: center; font-weight: bold; background-color: rgb(255, 204, 153);">HTTP
+request</td>
+<td style="width: 257px; text-align: center; font-weight: bold; background-color: rgb(255, 204, 153);">Définition</td>
+</tr>
+<tr>
+<td style="width: 118px;">currentRoom</td>
+<td style="width: 569px;">http://&lt;IP&gt;:&lt;PORT&gt;/Avatar/generic?command=currentRoom&amp;client=name</td>
+<td style="width: 257px;">Défini la variable <a href="index.html#APICurrentRoom">Avatar.currentRoom</a>
+avec le client passé dans la valeur <span style="font-weight: bold;">name</span></td>
+</tr>
+<tr>
+<td style="width: 118px;">muteOnOff</td>
+<td style="width: 569px;">http://&lt;IP&gt;:&lt;PORT&gt;/Avatar/generic?command=muteOnOff&amp;client=name&amp;set=value</td>
+<td style="width: 257px;">Coupe le son de l'enceinte
+du PC client passé dans la valeur <span style="font-weight: bold;">name<br>
+</span><br>
+Valeur de&nbsp;<span style="font-weight: bold;">value</span>:
+<ul>
+<li>1 : le son est coupé</li>
+<li>0 : le son est&nbsp;activé</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="width: 118px;">muteOnOffClient</td>
+<td style="width: 569px;">http://&lt;IP&gt;:&lt;PORT&gt;/Avatar/generic?command=muteOnOffClient&amp;client=name&amp;set=value</td>
+<td style="width: 257px;">Coupe l'écoute du client
+Avatar passé dans la valeur <span style="font-weight: bold;">name</span><span style="font-weight: bold;"><br>
+</span><br>
+valeur de <span style="font-weight: bold;">value</span>:<br>
+<ul>
+<li>1 : l'écoute du client est coupée</li>
+<li>0 : l'écoute du client est activé</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td style="width: 118px;">set_speaker</td>
+<td style="width: 569px;">http://&lt;IP&gt;:&lt;PORT&gt;/Avatar/generic?command=set_speaker&amp;client=name&amp;set=value</td>
+<td style="width: 257px;">Réduit ou augmente le son
+de l'enceinte du PC client passé dans la valeur <span style="font-weight: bold;">name</span><span style="font-weight: bold;"><br>
+</span><br>
+valeur de <span style="font-weight: bold;">value</span>:<br>
+<ul>
+<li>default : la valeur par défaut de <a href="index.html#MicroSpeaker">Config.speaker.default</a></li>
+<li>submin : réduit le son d'~2%</li>
+<li>submax : réduit le son d'~10%</li>
+<li>addmin : augmente le son d'~2%</li>
+<li>submax :&nbsp;augmente le son d'~10%</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<h2 style="color: rgb(51, 204, 255);" id="APIMore">Un
+peu plus loin ?</h2>
+Il existe beaucoup de plugins qui peuvent être de très
+bonnes&nbsp;bases de démonstration afin de comprendre et utiliser les
+fonctions décritent dans cette documentation, voir d'autres non
+documentées. N'hésitez pas à les télécharger depuis la bibliothèque de
+plugin et à les utiliser comme exemples. <br><br>Pour créer des nodes
+dans l'interface Avatar, vous pouvez utiliser comme base d'exemples des
+plugins comme SonosPlayer, eeDomus, SonosSound<br><br>
+Pour ceux qui veulent aller plus loin, travailler sur les <a href="#stateObjet">relations</a>
+avec la fonction <span style="font-style: italic;">helpers.relation()</span>,
+les profiles ou en connaitre tout simplement&nbsp;plus sur ce qu'il
+est possible de faire,
+vous
+pouvez&nbsp;consulter le module <a href="https://github.com/ava-ia/core">ava-ia</a>
+et la documentation <a href="https://github.com/ava-ia/core/wiki">wiki</a>
+associée disponible sur github.<br>
+<br>
+<br>
+<br>
+</div>
+</div>
+</body></html>

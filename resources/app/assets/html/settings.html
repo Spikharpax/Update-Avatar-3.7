@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./node_modules/xel/themes/material.css"/>
+    <script src="./node_modules/xel/xel.min.js"></script>
+    <script src="../../manageSettingTabs.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/form.css" />
+  </head>
+  <body>
+
+    <x-tabs>
+      <x-tab selected class="tabProps" onclick="showTab(event, 'properties')">
+        <x-box>
+          <x-icon name="network-wifi"></x-icon>
+          <x-label>Connexion</x-label>
+        </x-box>
+      </x-tab>
+
+      <x-tab class="tabProps" onclick="showTab(event, 'interface')">
+        <x-box>
+          <x-icon name="send"></x-icon>
+          <x-label>Interface</x-label>
+        </x-box>
+      </x-tab>
+
+      <x-tab class="tabProps" onclick="showTab(event, 'background')">
+        <x-box>
+          <x-icon name="personal-video"></x-icon>
+          <x-label>Ecran</x-label>
+        </x-box>
+      </x-tab>
+    </x-tabs>
+
+    <br>
+
+    <div id="main">
+      <form id="properties" class="tabForm">
+        <fieldset><legend>HTTP</legend>
+          <div class="notes">
+            <h4>HTTP Information</h4>
+            <p class="last">Entrez les informations réseau du serveur Avatar.<br>L'IP ne doit être changé que seulement si Avatar ne peut pas retrouver le PC avec son adresse locale.<br>Le port HTTP doit être identique au port HTTP défini dans les propriétés de configuration de chaque client.</p>
+         </div>
+         <div class="http">
+           <x-input skin="flat" size="10" maxlength="15" value="127.0.0.1" id="httpIp" class="ip">
+              <x-icon name="iP"></x-icon>
+              <x-label>Adresse IP</x-label>
+           </x-input>
+         </div>
+         <div class="http">
+           <x-input skin="flat" size="10" maxlength="4" value="3000" id="httpPort" class="port">
+              <x-icon name="Port"></x-icon>
+              <x-label>Port HTTP</x-label>
+           </x-input>
+        </div>
+       </fieldset>
+
+       <fieldset><legend>UDP</legend>
+         <div class="notes">
+           <h4>UDP Information</h4>
+           <p class="last">Entrez le Port UDP de connexion automatique des clients au serveur Avatar.<br>Il doit être identique au port UDP défini dans les propriétés de configuration de chaque client.<br>Attention, si vous utilisez le client Android, ne modifiez pas ce port.</p>
+        </div>
+        <div class="http">
+          <x-input skin="flat" size="10" maxlength="4" value="2222" id="UDPPort" class="port">
+             <x-icon name="UDP"></x-icon>
+             <x-label>Port UDP</x-label>
+          </x-input>
+        </div>
+       </fieldset>
+
+       <fieldset><legend>Client par défaut</legend>
+         <div class="notes">
+           <h4>Client Information</h4>
+           <p class="last">Le client par défaut est utilisé par Avatar pour toutes les actions qui nécessitent un client et pour lesquelles ce client n'est pas précisé. Le client par défaut doit exister.</p>
+        </div>
+        <div class="http">
+          <x-input skin="flat" size="25" maxlength="32" id="client" class="client">
+             <x-label>Client par défaut</x-label>
+          </x-input>
+        </div>
+       </fieldset>
+
+       <!-- <fieldset><legend>Interface</legend>
+         <div class="notes">
+           <h4>Interface Information</h4>
+           <p class="last">(Désactivé A.V.A.T.A.R > 3.0)<br>Vous pouvez lancer le serveur Avatar sans interface. Vous devrez ensuite l'exécuter par le fichier resources/core/Avatar.cmd.<br>Pour réactiver l'interface, ouvrez le fichier resources/core/Avatar.prop et positionnez la propriété interface à true.</p>
+        </div>
+        <div class="showInterface">
+          <x-box>
+            <x-switch skin="big" id="show-interface" disabled></x-switch>
+            <x-label for="show-interface" id="label-interface">&nbsp;&nbsp;Interface</x-label>
+          </x-box>
+        </div>
+      </fieldset> -->
+
+      <fieldset><legend>Synchronisation des actions</legend>
+        <div class="notes">
+          <h4>Synchronisation Information</h4>
+          <p class="last">Entrez un valeur en milli-secondes (de 10 à 1000) pour que le fichier action des plugins aient le temps de se synchroniser avant d'effectuer le traitement du fichier action suivant dans l'ordre des plugins.<br>Suivant les performances de votre serveur A.V.A.T.A.R, augmentez la valeur si une erreur survient dans la console concernant l'action en cours. Réduisez-la pour réduire le temps de latence de réaction des plugins.</p>
+       </div>
+       <div class="waitAction">
+         <x-numberinput id="wait-action" value="50" min="10" max="1000">
+          <x-stepper disabled="decrement"></x-stepper>
+        </x-numberinput>
+       </div>
+      </fieldset>
+
+       <fieldset><legend>Redémarrage</legend>
+         <div class="notes">
+           <h4>Redémarrage Information</h4>
+           <p class="last">Entrez le nombre de fois par 24H où le serveur et les clients redémarrent automatiquement.<br>Un redémarrage réinitialise l'application et permet de meilleures performances.<br>Pour ne pas interférer avec d'autres automatismes, celui-ci est réglé pour démarrer à plus 7 minutes des heures que vous définissez.</p>
+        </div>
+        <div class="RestartInterface">
+          <x-numberinput id="restart-interface" value="0" min="0" max="24">
+           <x-stepper disabled="decrement"></x-stepper>
+         </x-numberinput>
+        </div>
+       </fieldset>
+
+      </form>
+
+      <form id="interface" class="tabInterface" hidden=true>
+        <fieldset><legend>Node</legend>
+          <div class="notes">
+            <h4>Node Information</h4>
+            <p class="last">Vous pouvez définir les attributs communs d'apparance des nodes.<br><br>Un node est une "bulle" dans l'interface de l'application qui représente le Serveur Avatar ou un Client.<br><br>D'autres attributs peuvent être aussi définis dans le menu contextuel de chaque node.</p>
+         </div>
+         <div class="node_size_purcent">
+              <x-label>Taille des nodes:</x-label>
+               <x-numberinput id="node_size_purcent" class="node_size_purcent" value="0" suffix=" %" max="100" step="1">
+                   <x-stepper></x-stepper>
+               </x-numberinput>
+
+           <small>Entrez une valeur en pourcentage pour une nouvelle taille des nodes en fonction de leurs tailles courantes</small>
+         </div>
+
+         <div class="node_font_size">
+              <x-label>Taille de texte:</x-label>
+               <x-numberinput id="node_font_size" class="node_font_size" value="14" suffix=" px" min="3" max="30" step="1">
+                   <x-stepper></x-stepper>
+               </x-numberinput>
+
+           <small>Entrez la taille de texte pour le nom des nodes</small>
+         </div>
+
+         <div class="node_outline_size">
+              <x-label>Taille du surlignage:</x-label>
+               <x-numberinput id="node_outline_size" class="node_outline_size" value="3" min="0" max="10" step="1">
+                   <x-stepper></x-stepper>
+               </x-numberinput>
+
+           <small>Entrez la taille du surlignage du nom des nodes</small>
+         </div>
+
+         <div class="node_font_color">
+              <x-label >Couleur de texte:</x-label>
+              <x-colorselect id="node_font_color_select" value="#000">
+                <x-popover modal>
+                  <x-wheelcolorpicker id="node_font_color_picker" value="#000"></x-wheelcolorpicker>
+                </x-popover>
+              </x-colorselect>
+           <small>Entrez la couleur de texte pour le nom des nodes</small>
+         </div>
+
+         <div class="node_font_text_outline_color">
+              <x-label>Couleur de fond:</x-label>
+              <x-colorselect id="node_font_text_outline_color_select" value="#000">
+                <x-popover modal>
+                  <x-wheelcolorpicker id="node_font_text_outline_color_picker" value="#000"></x-wheelcolorpicker>
+                </x-popover>
+              </x-colorselect>
+           <small>Entrez la couleur de fond pour le nom des nodes</small>
+         </div>
+
+         <div class="node_current_color">
+              <x-label >Client courant:</x-label>
+              <x-colorselect id="node_current_color_select" value="#000">
+                <x-popover modal>
+                  <x-wheelcolorpicker id="node_current_color_picker" value="#000"></x-wheelcolorpicker>
+                </x-popover>
+              </x-colorselect>
+           <small>Entrez la couleur du client courant</small>
+         </div>
+         <div class="node_current_outline_size">
+              <x-label>Taille de la bordure:</x-label>
+               <x-numberinput id="node_current_outline_size" class="node_current_outline_size" value="4" min="2" max="10" step="1">
+                   <x-stepper></x-stepper>
+               </x-numberinput>
+
+           <small>Entrez la taille du surlignage du client courant</small>
+         </div>
+
+         <div class="div-node-name">
+           <x-box>
+             <x-switch skin="big" id="node-name"></x-switch>
+             <x-label for="node-name" id="label-node-name">Afficher le nom des nodes</x-label>
+           </x-box>
+
+           <x-box>
+             <x-switch skin="big" id="sensor"></x-switch>
+             <x-label for="sensor" id="label-sensor">Activer les capteurs de pièce courante</x-label>
+           </x-box>
+         </div>
+
+        </fieldset>
+        <fieldset><legend>Egde</legend>
+          <div class="notes">
+            <h4>Egde Information</h4>
+            <p class="last">Vous pouvez définir les attributs d'apparance des edges.<br>Un "Edge" est la ligne qui représente le lien de connexion entre nodes dans l'interface Avatar.<br>Il y a 3 types de liens:<br>- Classique entre un client Windows et Avatar.<br>- Mobile entre un client Android et Avatar<br>- Mappé avec un client Windows.</p>
+         </div>
+          <div class="complex_card">
+             <x-card>
+              <x-accordion>
+                <header>
+                  <x-label class="complex_card_label"><strong>Classique</strong></x-label>
+                  <x-label>Client Windows</x-label>
+                </header>
+                <main>
+                  <div class="edge">
+                       <x-label class="edge_label">Epaisseur:</x-label>
+                        <x-numberinput id="edge_classique_size" class="edge_input_size" value="3" min="1" max="10" step="1">
+                            <x-stepper></x-stepper>
+                        </x-numberinput>
+
+                        <small>Entrez l'épaisseur du lien de connexion.</small>
+                  </div>
+                  <div class="edge">
+                       <x-label class="edge_label">Couleur:</x-label>
+                       <x-colorselect id="edge_classique_color" value="#000">
+                         <x-popover modal>
+                           <x-wheelcolorpicker id="edge_classique_color_picker" value="#000"></x-wheelcolorpicker>
+                         </x-popover>
+                       </x-colorselect>
+                    <small>Entrez la couleur du lien de connexion.</small>
+                  </div>
+                </main>
+              </x-accordion>
+              <hr>
+              <x-accordion>
+                <header>
+                  <x-label class="complex_card_label"><strong>Mobile</strong></x-label>
+                  <x-label>Client Androïd</x-label>
+                </header>
+                <main>
+                  <div class="edge">
+                       <x-label class="edge_label">Epaisseur:</x-label>
+                        <x-numberinput id="edge_mobile_size" class="edge_input_size" value="3" min="1" max="10" step="1">
+                            <x-stepper></x-stepper>
+                        </x-numberinput>
+
+                        <small>Entrez l'épaisseur du lien de connexion.</small>
+                  </div>
+                  <div class="edge">
+                       <x-label class="edge_label">Couleur:</x-label>
+                       <x-colorselect id="edge_mobile_color" value="#000">
+                         <x-popover modal>
+                           <x-wheelcolorpicker id="edge_mobile_color_picker" value="#000"></x-wheelcolorpicker>
+                         </x-popover>
+                       </x-colorselect>
+                    <small>Entrez la couleur du lien de connexion.</small>
+                  </div>
+                </main>
+              </x-accordion>
+              <hr>
+              <x-accordion>
+                <header>
+                  <x-label class="complex_card_label"><strong>Mappé</strong></x-label>
+                  <x-label>Client Mappé</x-label>
+                </header>
+                <main>
+                  <div class="edge">
+                       <x-label class="edge_label">Epaisseur:</x-label>
+                        <x-numberinput id="edge_mappe_size" class="edge_input_size" value="3" min="1" max="10" step="1">
+                            <x-stepper></x-stepper>
+                        </x-numberinput>
+
+                        <small>Entrez l'épaisseur du lien de connexion.</small>
+                  </div>
+                  <div class="edge">
+                       <x-label class="edge_label">Couleur:</x-label>
+                       <x-colorselect id="edge_mappe_color" value="#000">
+                         <x-popover modal>
+                           <x-wheelcolorpicker id="edge_mappe_color_picker" value="#000"></x-wheelcolorpicker>
+                         </x-popover>
+                       </x-colorselect>
+                    <small>Entrez la couleur du lien de connexion.</small>
+                  </div>
+                </main>
+              </x-accordion>
+            </x-card>
+          </div>
+        </fieldset>
+        <fieldset><legend>Dialogue</legend>
+          <div class="notes">
+            <h4>Dialogue Information</h4>
+            <p class="last">Vous pouvez définir les couleurs des edges lorsqu'un client envoie une règle au serveur et lorsqu'il lui répond. <br><br>Vous pouvez aussi choisir la durée d'apparition des dialogues dans l'interface.</p>
+         </div>
+         <div class="rule_client_color">
+              <x-label >Règle d'un client:</x-label>
+              <x-colorselect id="rule_client_color_select" value="#000">
+                <x-popover modal>
+                  <x-wheelcolorpicker id="rule_client_color_picker" value="#000"></x-wheelcolorpicker>
+                </x-popover>
+              </x-colorselect>
+           <small>Entrez la couleur de l'edge lorsqu'un client envoie une règle au serveur.</small>
+         </div>
+         <div class="rule_server_color">
+              <x-label>Réponse du serveur:</x-label>
+              <x-colorselect id="rule_server_color_select" value="#000">
+                <x-popover modal>
+                  <x-wheelcolorpicker id="rule_server_color_picker" value="#000"></x-wheelcolorpicker>
+                </x-popover>
+              </x-colorselect>
+           <small>Entrez la couleur de l'edge lorsque le serveur répond à un client.</small>
+         </div>
+         <div class="speak">
+           <x-label >Durée des dialogues:</x-label>
+           <x-numberinput id="speak-interface" value="0" min="0" max="60"  suffix=" secs">
+             <x-stepper disabled="decrement"></x-stepper>
+           </x-numberinput>
+           <small>Entrez une valeur en secondes pour l'apparition des dialogues</small>
+         </div>
+        </fieldset>
+
+        <fieldset><legend>Infobulle</legend>
+          <div class="tooltip_show">
+            <img id="tooltip_img" class="tooltip_img" src="" alt=""/>
+          </div>
+          <div class="tooltip">
+              <x-label class="tooltip_label">Infobulle:</x-label>
+              <x-select class="tooltip_type">
+                <x-menu>
+                  <x-menuitem id="qtip-jtools" value="qtip-jtools" onclick="showToolType(event, 'qtip-jtools')">
+                    <x-label>Style Jtools</x-label>
+                  </x-menuitem>
+                  <x-menuitem id="qtip-bootstrap" value="qtip-bootstrap" onclick="showToolType(event, 'qtip-bootstrap')">
+                    <x-label>Style BootStrap</x-label>
+                  </x-menuitem>
+                  <x-menuitem id="qtip-youtube" value="qtip-youtube" onclick="showToolType(event, 'qtip-youtube')">
+                    <x-label>Style Youtube</x-label>
+                  </x-menuitem>
+                  <x-menuitem id="qtip-cluetip" value="qtip-cluetip" onclick="showToolType(event, 'qtip-cluetip')">
+                    <x-label>Style Cluetip</x-label>
+                  </x-menuitem>
+                  <x-menuitem id="qtip-tipped" value="qtip-tipped" onclick="showToolType(event, 'qtip-tipped')">
+                    <x-label>Style Tipped</x-label>
+                  </x-menuitem>
+                  <x-menuitem id="qtip-tipsy" value="qtip-tipsy" onclick="showToolType(event, 'qtip-tipsy')">
+                    <x-label>Style Tipsy</x-label>
+                  </x-menuitem>
+                  <x-menuitem id="qtip-rounded" value="qtip-rounded" onclick="showToolType(event, 'qtip-rounded')">
+                    <x-label>Style Rounded</x-label>
+                  </x-menuitem>
+                </x-menu>
+              </x-select>
+              <small>Choisissez le type d'infobulle dans l'interface pour l'affichage des règles dictées depuis un client.</small>
+          </div>
+        </fieldset>
+      </form>
+      <form id="background" class="tabBackground" hidden=true>
+        <div class="house"</div>
+            <img id="img_house" class="img_house" src="" alt=""/>
+        </div>
+        <x-button class="select_house" id="select_house">
+           <x-box>
+               <x-label>Choisir...</x-label>
+               <x-icon name="attachment"></x-icon>
+           </x-box>
+       </x-button>
+      </form>
+    </div>
+    <div class="manage">
+       <div class="Save">
+         <x-button id="saveProp" class="saveProp">
+          <x-box>
+            <x-label>Enregistrer</x-label>
+            <x-icon name="save"></x-icon>
+          </x-box>
+        </x-button>
+      </div>
+      <div class="Exit">
+        <x-button id="exitProp" class="exitProp">
+          <x-box>
+            <x-label>Quitter</x-label>
+            <x-icon name="open-in-new"></x-icon>
+          </x-box>
+        </x-button>
+      </div>
+    </div>
+
+    <x-notification id="notification" timeout="1500"></x-notification>
+
+    <script>
+      require('../../settings.js');
+    </script>
+  </body>
+</html>

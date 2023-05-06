@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./node_modules/xel/themes/material.css"/>
+    <script src="./node_modules/xel/xel.min.js"></script>
+    <link href="../../lib/jQuery-3.6.0/datatables.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../css/controlPlugins.css" />
+  </head>
+  <body>
+    <div class="tbllabel">
+      <x-label class="label">La recherche d'une règle se fait séquentiellement dans tous les plugins de votre bibliothèque, les uns après les autres.</x-label>
+      <x-label class="label">Par conséquent, le temps de recherche de la règle et le traitement de l'action associée peut devenir très long suivant le nombre de plugins et de règles que vous avez.</x-label>
+      <x-label class="label">Pour accélérer les temps de réponses pour les plugins les plus utilisés, vous pouvez leurs donner un ordre de chargement pour que leurs règles soient trouvées en premier. Choisissez un plugin puis commencez par la position 1, puis un 2ème plugin et 2, puis un autre et 3, etc... Laissez la valeur "Par défaut" pour qu'un plugin soit chargé aléatoirement sans ordre défini. Pour supprimer une position, enlevez la valeur.</x-label>
+      <x-label class="label">Vous pouvez aussi définir si le plugin est actif ou non.</x-label>
+    </div>
+    <div id="tblPlugins" class="tblPlugins">
+      <table id="controlPlugins" class="display" height="100%" width="100%"></table>
+    </div>
+    <x-buttons tracking="-1" class='buttons-manage'>
+      <x-box horizontal>
+         <x-button id="SavePosition" skin="nav">
+           <x-box>
+             <x-icon  name="save"></x-icon>
+             <x-label>Sauvegarder</x-label>
+           </x-box>
+         </x-button>
+        <x-button id="exit" skin="nav">
+          <x-box>
+            <x-icon name="close"></x-icon>
+            <x-label>Fermer</x-label>
+          </x-box>
+        </x-button>
+      </x-box>
+    </x-buttons>
+    <x-notification id="notification"></x-notification>
+    <script  src="../../lib/jQuery-3.6.0/jQuery-3.6.0/jquery-3.6.0.js"></script>
+    <script  src="../../lib/jQuery-3.6.0/datatables.min.js"></script>
+    <script  src="../../controlPlugins.js"></script>
+  </body>
+</html>

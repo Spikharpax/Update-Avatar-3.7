@@ -1,0 +1,498 @@
+/* form.css */
+
+* {
+  font: 12px helvetica neue, helvetica, arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #CACACA;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  width : auto;
+  height: auto;
+}
+
+
+form fieldset {
+  clear: both;
+  font-size: 100%;
+  border-color: #000000;
+  border-width: 1px 0 0 0;
+  border-style: solid none none none;
+  padding: 10px;
+  margin: 0 0 0 0;
+}
+
+form fieldset legend {
+  font-size: 150%;
+  font-weight: normal;
+  color: #000000;
+  margin: 0 0 0 0;
+  padding: 0 5px;
+}
+
+label {
+  font-size: 100%;
+}
+
+label u {
+  font-style: normal;
+  text-decoration: underline;
+}
+
+x-input, input, select, textarea {
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 100%;
+  color: #000000;
+}
+
+textarea {
+  overflow: auto;
+}
+
+form div {
+  clear: left;
+  display: block;
+  width:  auto;
+  zoom: 1;
+  margin: 0 0 0 0;
+  padding: 1px 0px;
+}
+
+
+form fieldset div.notes {
+  float: right;
+  width: 300px;
+  height: auto;
+  margin: 0 0 10px 10px;
+  padding: 5px;
+  border: 1px solid #666666;
+  background-color: #ffffe1;
+  color: #666666;
+  font-size: 88%;
+}
+
+form fieldset div.notes h4 {
+  background-image: url(../../images/icons/icon_info.png);
+  background-repeat: no-repeat;
+  background-position: top left;
+  padding: 3px 0 3px 27px;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #666666;
+  color: #666666;
+  font-size: 110%;
+  font-weight: bold;
+}
+
+form fieldset div.notes p {
+  margin: 0em 0em 1.2em 0em;
+  color: #666666;
+  font-size: 90%;
+}
+
+form fieldset div.notes p.last {
+  margin: 0em;
+}
+
+form fieldset p.last {
+  font-size: 90%;
+  margin: 0em;
+}
+
+form div fieldset {
+  clear: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #666666;
+  margin: 0 0 0 144px;
+  padding: 0 5px 5px 5px;
+  width: 197px;
+}
+
+form div fieldset legend {
+  font-size: 100%;
+  padding: 0 3px 0 9px;
+}
+
+
+form div.required fieldset legend {
+  font-weight: bold;
+}
+
+form div label {
+  display: block;
+  float: left;
+  width: 130px;
+  padding: 3px 5px;
+  margin: 0 0 5px 0;
+  text-align: right;
+}
+
+form div.http {
+  margin: 0 0 0 20px;
+}
+
+form div.showInterface {
+  margin: 40px 0 0 20px;
+}
+
+form div.RestartInterface {
+  margin: 40px 0 0 20px;
+}
+
+form div.waitAction {
+  margin: 40px 0 0 20px;
+}
+
+
+#node-name {
+  margin-left: 20px;
+}
+#label-node-name {
+  width: 300px;
+  max-width: 300px;
+}
+
+#sensor {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+#label-sensor {
+  width: 300px;
+  max-width: 300px;
+}
+
+.div-node-name {
+  margin-top: 10px;
+  width: 300px;
+  max-width: 300px;
+  height: 50px;
+}
+
+div.manage {
+  margin-top: 30px;
+  width:  auto;
+  height: auto;
+}
+
+
+div.manage div.Save {
+  display: inline-block;
+  margin-bottom: 10px;
+  width: 49%;
+  height: inherit;
+}
+
+div.manage div.Exit {
+  display: inline-block;
+  margin-bottom: 10px;
+  width:  50%;
+  height: inherit;
+}
+
+div.manage div.Save x-button.saveProp {
+ float: left;
+ margin-left: 100px;
+}
+
+div.manage div.Exit x-button.exitProp {
+ float: right;
+ margin-right: 100px;
+}
+
+
+div.manage div.SaveNode {
+  display: inline-block;
+  width: 50%;
+}
+
+div.manage div.ExitNode {
+  display: inline-block;
+  width:  49%;
+}
+
+div.manage div.SaveNode x-button.savePropNode {
+ float: left;
+ margin-left: 90px;
+ position: fixed;
+ bottom: 10px;
+}
+
+div.manage div.ExitNode x-button.exitPropNode {
+ float: left;
+ margin-left: 20px;
+ position: fixed;
+ bottom: 10px;
+}
+
+form div.http x-input.ip {
+  margin: 20px 0 0 0;
+  width: 100px;
+  text-align: left;
+}
+
+form div.http x-input.port {
+  margin: 20px 0 0 0;
+  width: 70px;
+  text-align: left;
+}
+
+
+form div.http x-input.client {
+  margin: 20px 0 0 0;
+  width: 100px;
+  text-align: left;
+}
+
+form.tabInterface div x-label {
+  display: inline-block;
+  font-size: 100%;
+  text-align: left;
+  margin: 0 0 0px 20px;
+  width: 120px;
+  height: : auto;
+}
+
+
+
+form.tabInterface div x-numberinput {
+  display: inline-block;
+  font-size: 100%;
+  margin: 0 0 0 0;
+  width: 70px;
+  height: : auto;
+}
+
+form.tabInterface div x-colorselect {
+  display: inline-block;
+  margin: 0 0 0 0;
+  width: 20px;
+  height: : auto;
+}
+
+form.tabInterface div small {
+  display: block;
+  margin: 0 0 5px 20px;
+  font-size: 80%;
+  zoom: 1;
+}
+
+form.tabInterface div.complex_card {
+  margin: 0 0 0 0;
+  width: 245px;
+  height: : auto;
+}
+
+form.tabInterface div.complex_card div.edge {
+  margin: 0 0 0 0;
+  width: auto;
+  height: : auto;
+}
+
+form.tabInterface div.complex_card div.edge x-numberinput.edge_input_size {
+  display: inline-block;
+  margin: 0 0 0 0;
+  width: 50px;
+  height: : auto;
+}
+
+
+form.tabInterface div.complex_card x-colorselect {
+  display: inline-block;
+  margin: 0 0 0 0;
+  width: 20px;
+  height: : auto;
+}
+
+
+form.tabInterface div.complex_card x-label.edge_label{
+  display: inline-block;
+  font-size: 100%;
+  text-align: left;
+  margin: 0 0 0 0;
+  width: 120px;
+  height: : auto;
+}
+
+form.tabInterface div.complex_card x-card x-accordion header x-label.complex_card_label {
+  font-size: 100%;
+  text-align: left;
+  margin: 0 0 0 0;
+  width: 70px;
+  height: : auto;
+}
+
+
+
+form.tabInterface div.complex_card small {
+  display: block;
+  margin: 0 0 5px 0;
+  font-size: 80%;
+  zoom: 1;
+}
+
+
+form.tabInterface div.tooltip_show {
+  float: right;
+  width: 200px;
+  height: auto;
+  text-align: center;
+  margin: 0 0 10px 10px;
+  padding: 5px;
+  border: 1px solid #666666;
+  background-color: #ffffe1;
+  color: #666666;
+  font-size: 88%;
+}
+
+
+form.tabBackground div.house {
+  float: center;
+  width: auto;
+  height: 320px;
+  margin: 0 0 10px 0px;
+  padding: 5px;
+  color: inherit;
+}
+
+
+form.tabBackground div.node {
+  float: center;
+  width: auto;
+  height: 260px;
+  margin: 0 0 0 0;
+  padding: 5px;
+  color: inherit;
+}
+
+x-button.select_node {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
+   width: 130px;
+   height: auto;
+}
+
+x-button.select_house {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   text-align: center;
+   width: 130px;
+   height: auto;
+}
+
+
+form.tabBackground div.house img.img_house {
+   float:inherit;
+   object-fit: contain;
+   width: auto;
+   height: inherit;
+}
+
+
+form.tabInterface div.tooltip small {
+  margin: 0 0 5px 20px;
+  width: 220px;
+  font-size: 80%;
+  zoom: 1;
+}
+
+form.tabInterface div.tooltip x-label.tooltip_label {
+  display: inline-block;
+  font-size: 100%;
+  text-align: left;
+  margin: 0 0 0px 20px;
+  width: 60px;
+  height: : auto;
+}
+
+form.tabInterface div.tooltip x-select.tooltip_type {
+  display: inline-block;
+  margin: 0 0 0 0px;
+  text-align: left;
+  width: 160px;
+  height: : auto;
+}
+
+
+
+form.tabInterface fieldset div.notes {
+  float: right;
+  width: 200px;
+  height: auto;
+  margin: 0 0 10px 10px;
+  padding: 5px;
+  border: 1px solid #666666;
+  background-color: #ffffe1;
+  color: #666666;
+  font-size: 88%;
+}
+
+form.tabInterface fieldset div.notes h4 {
+  background-image: url(../../images/icons/icon_info.png);
+  background-repeat: no-repeat;
+  background-position: top left;
+  padding: 3px 0 3px 27px;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #666666;
+  color: #666666;
+  font-size: 110%;
+  font-weight: bold;
+}
+
+form.tabInterface fieldset div.notes p {
+  margin: 0em 0em 1.2em 0em;
+  color: #666666;
+  font-size: 90%;
+}
+
+form.tabInterface fieldset div.notes p.last {
+  margin: 0em;
+}
+
+
+
+form.tabInterface fieldset div.notes_edge {
+  float: left;
+  width: auto;
+  height: auto;
+  margin: 0 0 10px 0;
+  padding: 5px;
+  border: 1px solid #666666;
+  background-color: #ffffe1;
+  color: #666666;
+  font-size: 88%;
+}
+
+form.tabInterface fieldset div.notes_edge h4 {
+  background-image: url(../../images/icons/icon_info.png);
+  background-repeat: no-repeat;
+  background-position: top left;
+  padding: 3px 0 3px 27px;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #666666;
+  color: #666666;
+  font-size: 110%;
+  font-weight: bold;
+}
+
+form.tabInterface fieldset div.notes_edge p {
+  margin: 0em 0em 1.2em 0em;
+  color: #666666;
+  font-size: 90%;
+}
+
+form.tabInterface fieldset div.notes_edge p.last {
+  margin: 0em;
+}
