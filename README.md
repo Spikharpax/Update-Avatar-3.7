@@ -6,6 +6,7 @@ Sinon installez d'abord la version 3.6 [ICI !](https://github.com/Spikharpax/A.V
 Ajoute et corrige:
 * La possibilité de réordonner (et accessoirement d'activer/désactiver) les plugins directement depuis l'interface du Serveur (Plugins -> Ordonner les plugins)
 * La mise à jour de la création automatique de plugin (Plugins -> Plugin studio -> Créer un plugin)
+* Un nouveau paramètre "Synchronisation des actions" dans les paramètres du serveur
 * La mise à jour de la documentation.
 * Et globalement, de petites corrections du code pour quelques petits bugs et une meilleure stabitilté.
 
